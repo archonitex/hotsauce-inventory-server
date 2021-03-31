@@ -1,0 +1,20 @@
+
+.date-input-container {
+	border: 2px solid black;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.date-input-container:hover {
+  background: #e7e7e7;
+}
+
+.input-container input {
+	background: #ffffff99 !important;
+	width: calc(2.5ch) !important;
+}
+
+.input-container input.input-year {
+	width: calc(5ch) !important;
+}
