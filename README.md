@@ -15,7 +15,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/franciscarriere/hotsauce-inventory">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="images/logo-white.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Hot Sauce Inventory</h3>
