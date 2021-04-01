@@ -10,8 +10,6 @@
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -118,10 +116,10 @@ Project Link: [https://github.com/franciscarriere/hotsauce-inventory](https://gi
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/franciscarriere/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/franciscarrierehotsauce-inventorygraphs/contributors
+[contributors-url]: https://github.com/franciscarriere/hotsauce-inventorygraphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/franciscarriere/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/franciscarrierehotsauce-inventorynetwork/members
+[forks-url]: https://github.com/franciscarriere/hotsauce-inventorynetwork/members
 [stars-shield]: https://img.shields.io/github/stars/franciscarriere/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/franciscarrierehotsauce-inventorystargazers
+[stars-url]: https://github.com/franciscarriere/hotsauce-inventorystargazers
 [issues-shield]: https://img.shields.io/github/issues/franciscarriere/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/franciscarrierehotsauce-inventoryissues
+[issues-url]: https://github.com/franciscarriere/hotsauce-inventoryissues
