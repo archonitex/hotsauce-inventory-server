@@ -23,11 +23,6 @@
   <p align="center">
     Hot Sauce Inventory Management
     <br />
-    <a href="https://github.com/franciscarriere/hotsauce-inventory"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/franciscarriere/hotsauce-inventory">View Demo</a>
-    ·
     <a href="https://github.com/franciscarriere/hotsauce-inventory/issues">Report Bug</a>
     ·
     <a href="https://github.com/franciscarriere/hotsauce-inventory/issues">Request Feature</a>
@@ -41,24 +36,14 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -116,10 +101,10 @@ Project Link: [https://github.com/franciscarriere/hotsauce-inventory](https://gi
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/franciscarriere/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/franciscarriere/hotsauce-inventorygraphs/contributors
+[contributors-url]: https://github.com/franciscarriere/hotsauce-inventory/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/franciscarriere/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/franciscarriere/hotsauce-inventorynetwork/members
+[forks-url]: https://github.com/franciscarriere/hotsauce-inventory/network/members
 [stars-shield]: https://img.shields.io/github/stars/franciscarriere/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/franciscarriere/hotsauce-inventorystargazers
+[stars-url]: https://github.com/franciscarriere/hotsauce-inventory/stargazers
 [issues-shield]: https://img.shields.io/github/issues/franciscarriere/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/franciscarriere/hotsauce-inventoryissues
+[issues-url]: https://github.com/franciscarriere/hotsauce-inventory/issues
