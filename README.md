@@ -112,16 +112,16 @@ To start the server, use the provided startup shell script.
 
 Your Name - [@FCArchon](https://twitter.com/FCArchon) - senatorsfc@gmail.com
 
-Project Link: [https://github.com/francis_carriere/hotsauce-inventory](https://github.com/francis_carriere/hotsauce-inventory)
+Project Link: [https://github.com/franciscarriere/hotsauce-inventory](https://github.com/franciscarriere/hotsauce-inventory)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/francis_carriere/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/francis_carriere/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/francis_carriere/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/francis_carriere/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/francis_carriere/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/francis_carriere/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/francis_carriere/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/francis_carriere/repo/issues
+[contributors-shield]: https://img.shields.io/github/contributors/franciscarriere/repo.svg?style=for-the-badge
+[contributors-url]: https://github.com/franciscarriere/repo/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/franciscarriere/repo.svg?style=for-the-badge
+[forks-url]: https://github.com/franciscarriere/repo/network/members
+[stars-shield]: https://img.shields.io/github/stars/franciscarriere/repo.svg?style=for-the-badge
+[stars-url]: https://github.com/franciscarriere/repo/stargazers
+[issues-shield]: https://img.shields.io/github/issues/franciscarriere/repo.svg?style=for-the-badge
+[issues-url]: https://github.com/franciscarriere/repo/issues
