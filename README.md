@@ -16,7 +16,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/francis_carriere/hotsauce-inventory">
+  <a href="https://github.com/franciscarriere/hotsauce-inventory">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -25,14 +25,14 @@
   <p align="center">
     Hot Sauce Inventory Management
     <br />
-    <a href="https://github.com/francis_carriere/hotsauce-inventory"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/franciscarriere/hotsauce-inventory"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/francis_carriere/hotsauce-inventory">View Demo</a>
+    <a href="https://github.com/franciscarriere/hotsauce-inventory">View Demo</a>
     ·
-    <a href="https://github.com/francis_carriere/hotsauce-inventory/issues">Report Bug</a>
+    <a href="https://github.com/franciscarriere/hotsauce-inventory/issues">Report Bug</a>
     ·
-    <a href="https://github.com/francis_carriere/hotsauce-inventory/issues">Request Feature</a>
+    <a href="https://github.com/franciscarriere/hotsauce-inventory/issues">Request Feature</a>
   </p>
 </p>
 
@@ -77,7 +77,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/francis_carriere/hotsauce-inventory.git
+   git clone https://github.com/franciscarriere/hotsauce-inventory.git
    ```
 
 2. Run NPM install for the server component
