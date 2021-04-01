@@ -10,14 +10,13 @@ createIngredient = (req, res) => {
         })
     }
 
-    console.log(body)
     const ingredient = new Ingredient(body)
 
     if (!ingredient) {
         return res.status(400).json({ success: false, error: err })
     }
 
-    Ingredient.findOne({ name: req.params.name }, (err, existingIngredient) => {
+    Ingredient.findOne({ ingredient: req.params.ingredient }, (err, existingIngredient) => {
         if(existingIngredient) { 
             return res.status(409).json({
                 error,
@@ -25,7 +24,7 @@ createIngredient = (req, res) => {
             });
         }
 
-        console.log('Creating ingredient ' + ingredient.name)
+        console.log('Creating ingredient ' + ingredient.ingredient)
 
         ingredient
         .save()
@@ -53,8 +52,8 @@ getIngredients = async (req, res) => {
         }
         if (!ingredients.length) {
             return res
-                .status(404)
-                .json({ success: false, error: `Ingredient not found` })
+                .status(204)
+                .json({ success: true, data: [] })
         }
         return res.status(200).json({ success: true, data: ingredients })
     }).catch(err => console.log(err))

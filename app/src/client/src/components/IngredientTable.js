@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import IngredientAutoSuggest from '../components/IngredientAutoSuggest'
 import { Grid, Row, Col } from "react-flexbox-grid";
+import api from '../api'
 import uuid from 'react-uuid'
 
 import styled from 'styled-components'
@@ -21,8 +22,26 @@ class IngredientTable extends React.Component {
       super();
   
       this.state = {
-        rows: [ { id: uuid(), ingredient: '', quantity: '' } ]
+        rows: []
       };
+    }
+
+    componentDidMount = async () => {        
+        const id = this.props.batchId
+        var batch = await api.getBatchById(id)
+        
+        //Convert _id to id
+        var batchIngredients = batch.data.data.ingredients
+        var i;
+        for(i = 0; i < batchIngredients.length; i++){
+            batchIngredients[i].id = batchIngredients[i]['_id'];
+            delete batchIngredients[i]._id;
+        }
+
+        this.setState({
+            rows: batchIngredients
+        })
+        this.props.onIngredientsChange(batchIngredients)
     }
 
     addRow = async event => {
@@ -45,11 +64,9 @@ class IngredientTable extends React.Component {
         this.props.onIngredientsChange(rows)
     }
 
-    handleChangeIngredientName = async (event, newIngredient) => {
-        const elementId = event.target.type == "text" ? event.target.parentNode.parentNode.id : event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id
-
+    handleChangeIngredientName = async (event, newIngredient, ingredientId) => {
         var rows = this.state.rows
-        var matchingRow = rows.find( ({ id }) => id === elementId );
+        var matchingRow = rows.find( ({ id }) => id === ingredientId );
         if(matchingRow){
             matchingRow.ingredient = newIngredient
         }
@@ -74,7 +91,7 @@ class IngredientTable extends React.Component {
                 <table>
                     {this.state.rows.map((r) => (
                       <tr>
-                          <td id={r.id}> <IngredientAutoSuggest onIngredientChange={this.handleChangeIngredientName}/> </td>
+                          <td id={r.id}> <IngredientAutoSuggest id={r.id} value={r.ingredient} onIngredientChange={this.handleChangeIngredientName}/> </td>
                           <td id={r.id}> <InputText id={r.id} type="text" value={r.quantity} placeholder='Qty' onChange={this.handleChangeIngredientQuantity}></InputText> </td>
                           <td id={r.id}> <button class="btn" onClick={this.removeRow}>💣</button> </td>
                       </tr>

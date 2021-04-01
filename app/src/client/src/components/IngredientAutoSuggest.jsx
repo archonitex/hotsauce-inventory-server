@@ -5,12 +5,12 @@ import api from '../api'
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion.ingredient;
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-    {suggestion.name}
+    {suggestion.ingredient}
   </div>
 );
 
@@ -32,11 +32,11 @@ class IngredientAutoSuggest extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true, value: this.props.value || '' })
 
     await api.getIngredients().then(ingredients => {
         this.setState({
-            ingredients: ingredients.data.data,
+            ingredients: ingredients.data.data || [],
             isLoading: false,
         })
     })
@@ -47,7 +47,7 @@ class IngredientAutoSuggest extends React.Component {
       value: newValue
     });
 
-    this.props.onIngredientChange(event, newValue)
+    this.props.onIngredientChange(event, newValue, this.props.id)
   };
 
   getSuggestions = value => {
@@ -55,7 +55,7 @@ class IngredientAutoSuggest extends React.Component {
     const inputLength = inputValue.length;
   
     return inputLength === 0 ? [] : this.state.ingredients.filter(ingredient =>
-      ingredient.name.toLowerCase().includes(inputValue)
+      ingredient.ingredient.toLowerCase().includes(inputValue)
     );
   };
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import api from '../api'
+import moment from 'moment';
 
 import ReactTable from "react-table-6"
 import "react-table-6/react-table.css"
@@ -39,9 +40,16 @@ class PrintBatchLabel extends Component {
     printUser = event => {
         event.preventDefault()
 
-        api.printBatchById(this.props.id).then(res => {
-            window.dymoPrint(res.data.data)
-        })
+        const copies = prompt('Print how many copies?', "1")
+        if(copies != null){
+            const copiesInt = parseInt(copies);
+
+            var payload = { copies: copiesInt }
+            
+            api.printBatchById(this.props.id, payload).then(res => {
+                console.log("Printing...")
+            })
+        }        
     }
 
     render() {
@@ -99,15 +107,6 @@ class BatchesList extends Component {
                 isLoading: false,
             })
         })
-
-        const dymoSDKScript = document.createElement("script");
-        dymoSDKScript.src = "http://labelwriter.com/software/dls/sdk/js/DYMO.Label.Framework.latest.js";
-        dymoSDKScript.async = true;
-        document.body.appendChild(dymoSDKScript);
-
-        const dymoPrintScript = document.createElement("script");
-        dymoPrintScript.innerHTML = 'function dymoPrint(r){try{var e=dymo.label.framework.openLabelXml(r),t=dymo.label.framework.getPrinters();if(0==t.length)throw"No DYMO printers are installed. Install DYMO printers.";for(var a="",l=0;l<t.length;++l){var n=t[l];if("LabelWriterPrinter"==n.printerType){a=n.name;break}}if(""==a)throw"No LabelWriter printers found. Install LabelWriter printer";alert("PRINTING TO "+a),e.print(a)}catch(r){alert(r.message||r)}}'
-        document.body.appendChild(dymoPrintScript);
     }
 
     render() {
@@ -119,29 +118,31 @@ class BatchesList extends Component {
                 Header: 'Name',
                 accessor: 'name',
                 filterable: true,
+                Cell: ({ value }) => <div style={{ textAlign: "center" }}>{value}</div>
             },
             {
                 Header: 'Date',
                 accessor: 'date',
-                filterable: true,
+                filterable: false,
+                Cell: ({ value }) => <div style={{ textAlign: "center" }}>{moment(value).format('ll')}</div>
             },
             {
                 Header: 'Actions',
                 accessor: '',
                 Cell: function(props) {
                     return (
-                        <BlockSpan>
+                        <div style={{ float: "right" }}>
                             <DeleteBatch id={props.original._id} />
                             <UpdateBatch id={props.original._id} />
                             <PrintBatchLabel id={props.original._id} />
-                        </BlockSpan>
+                        </div>
                     )
                 },
             },
         ]
 
         let showTable = true
-        if (!batches.length) {
+        if (batches && !batches.length) {
             showTable = false
         }
 

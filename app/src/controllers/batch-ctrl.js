@@ -14,9 +14,7 @@ createBatch = (req, res) => {
         })
     }
 
-    console.log('here')
-    console.log(body)
-    
+    //Fix date format
     body.date = moment(body.date, 'DD-MM-YYYY')
 
     const batch = new Batch(body)
@@ -59,8 +57,14 @@ updateBatch = async (req, res) => {
                 message: 'Batch not found!',
             })
         }
+        //Fix date format
+        body.date = moment(body.date, 'DD-MM-YYYY')
+
         batch.name = body.name
         batch.date = body.date
+        batch.heat = body.heat
+        batch.ingredients = body.ingredients
+
         batch
             .save()
             .then(() => {
@@ -117,8 +121,8 @@ getBatches = async (req, res) => {
         }
         if (!batches.length) {
             return res
-                .status(404)
-                .json({ success: false, error: `Batch not found` })
+                .status(204)
+                .json({ success: true, data: [] })
         }
         return res.status(200).json({ success: true, data: batches })
     }).catch(err => console.log(err))
@@ -136,32 +140,41 @@ printBatchById = async (req, res) => {
                 .json({ success: false, error: `Batch not found` })
         }
 
-        var templateXml = fs.readFileSync(path.resolve(__dirname, '../dymo-templates/SauceTemplate.label'), 'utf8');
+        const pathToGLabel = path.resolve(__dirname, '../dymo-templates')
+        
+        var templateXml = fs.readFileSync(pathToGLabel + '/template.glabels', 'utf8');
         
         //Customize template with batch info
-        templateXml = templateXml.replace("${QRCODE_TEXT}", batch.id);
+        templateXml = templateXml.replace("${BATCH_ID}", batch.id);
         templateXml = templateXml.replace("${BATCH_NAME}", batch.name);
+        templateXml = templateXml.replace("${DATE}", moment(batch.createdAt).format('ll'));
         
         var ingredientsString = batch.ingredients.map(function(item) {
             return item.ingredient
           }).join(', ');
-          
-        //Change the number in here for the line length limit
-        var ingredientSplit = ingredientsString.split(/(.{30,}?)(?:,|$)/g).filter(Boolean)
+        templateXml = templateXml.replace("${INGREDIENTS}", ingredientsString);
         
-        templateXml = templateXml.replace("${INGREDIENTS_1}", ingredientSplit[0] || '');
-        templateXml = templateXml.replace("${INGREDIENTS_2}", ingredientSplit[1] || '');
-        
-        if(ingredientSplit.length > 2){
-            templateXml = templateXml.replace("${INGREDIENTS_3}", ingredientsSplit.slice(2, ingredientsSplit.length));
-        }else{
-            templateXml = templateXml.replace("${INGREDIENTS_3}", "");
-        }
+        const maxHeightValue = 61;
+        var heatBarHeight = (batch.heat / 100) * maxHeightValue;
+        templateXml = templateXml.replace("${HEAT_BAR_HEIGHT}", heatBarHeight.toString());
 
-        templateXml = templateXml.replace("${DATE}", moment(batch.createdAt).format('ll'));
-        
-        return res.status(200).json({ success: true, data: templateXml })
+        //Create temporary file
+        const templateFilePath = pathToGLabel + '/' + batch.id + '.glabels';
+        fs.writeFileSync(templateFilePath, templateXml); 
 
+        //Execute
+        const { exec } = require('child_process');
+        exec('(cd ' + pathToGLabel + ' ; ./glabels-batch-qt ' + templateFilePath + ' -c ' + req.body.copies + ')', (err, stdout, stderr) => {
+            fs.unlinkSync(templateFilePath)
+            if (err) {
+                return res
+                .status(500)
+                .json({ success: false, error: err })
+            } else {
+                return res.status(200).json({ success: true, data: templateXml })
+            }
+        });
+        
     }).catch(err => console.log(err))
 }
 
