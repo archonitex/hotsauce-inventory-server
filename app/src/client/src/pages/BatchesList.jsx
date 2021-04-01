@@ -20,6 +20,7 @@ const Update = styled.div`
     color: #ef9b0f;
     cursor: pointer;
     padding-left: 10pt;
+    font-size: 20px;
 `
 
 const Print = styled.div`
@@ -27,6 +28,7 @@ const Print = styled.div`
     color: #34a1eb;
     cursor: pointer;
     padding-left: 10pt;
+    font-size: 20px;
 `
 
 const Delete = styled.div`
@@ -34,6 +36,7 @@ const Delete = styled.div`
     color: #ff0000;
     cursor: pointer;
     padding-left: 10pt;
+    font-size: 20px;
 `
 
 class PrintBatchLabel extends Component {

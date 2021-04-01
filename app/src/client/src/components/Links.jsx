@@ -19,7 +19,7 @@ class Links extends Component {
         return (
             <React.Fragment>
                 <Link to="/" className="navbar-brand">
-                    HotSauce Inventory
+                    Hot Sauce Inventory
                 </Link>
                 <Collapse>
                     <List>

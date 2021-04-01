@@ -28,6 +28,11 @@ const InputText = styled.input.attrs({
 })`
     margin: 5px;
 `
+const InputTextArea = styled.textarea.attrs({
+    className: 'form-control',
+})`
+    margin: 5px;
+`
 
 const Button = styled.button.attrs({
     className: `btn btn-primary`,
@@ -79,6 +84,7 @@ class BatchUpdate extends Component {
             id: this.props.match.params.id,
             name: '',
             date: dateString,
+            notes: '',
             heat: 0,
             ingredients: []
         }
@@ -89,12 +95,16 @@ class BatchUpdate extends Component {
         this.setState({ name })
     }
 
+    handleChangeInputNotes = async event => {
+        const notes = event.target.value
+        this.setState({ notes })
+    }
+
     handleChangeInputDate = (newDate) => {
         this.setState({ date: newDate })
     }
 
     handleChangeIngredients = async ingredientsList => {
-        debugger;
         this.setState({ ingredients: ingredientsList })
     }
 
@@ -107,9 +117,10 @@ class BatchUpdate extends Component {
     }
 
     handleUpdateBatch = async () => {
-        const { id, name, date, ingredients, heat} = this.state
-        var payload = { name, date, ingredients, heat }        
+        const { id, name, date, notes, ingredients, heat} = this.state
+        var payload = { name, date, notes, ingredients, heat }        
 
+        debugger;
         await api.updateBatchById(id, payload).then(res => {
             window.location = '/batches'
         })
@@ -125,73 +136,82 @@ class BatchUpdate extends Component {
         this.setState({
             name: batch.data.data.name,
             date: dateString,
-            heat: batch.data.data.heat,
-            ingredients: batch.data.data.ingredients,
+            notes: batch.data.data.notes || '',
+            heat: batch.data.data.heat || 0,
+            ingredients: batch.data.data.ingredients || [],
         })
     }
 
     render() {
-        const { name, date, heat } = this.state
+        const { name, date, notes, heat } = this.state
         return (
             <Wrapper>  
-                <Title>Edit Batch</Title>              
-                <Grid>
-                    <h5>Batch Information</h5>
-                    <Row>
-                        <Col xs={5} >
-                            <InputText
-                                type="text"
-                                placeholder="Batch name"
-                                value={name}
-                                onChange={this.handleChangeInputName}
-                                onKeyDown={this.handleKeyDown}
-                            />
-                        </Col>
-                        <Col xs={5} xsOffset={2} >
-                            <DateInput
-                                date={date}
-                                format='DDMMYYYY'
-                                separator='-'
-                                onChange={this.handleChangeInputDate}
-                            />
-                        </Col>
-                    </Row>
-                    <p></p>
-                    <h5>Heat (Mild &lt;-&gt; Spicy)</h5>
-                    <Row>                            
-                        <Col xs={5} >
-                            <ReactSlider
-                                className="horizontal-slider"
-                                value={heat}
-                                onChange={this.handleChangeHeat}
-                                renderTrack={Track}
-                                renderThumb={Thumb}
-                            />
-                        </Col>
-                    </Row>
-                </Grid>
+                <Title>Edit Batch</Title> 
+                <Wrapper id="edit-batch-container">
+                               
+                    <Grid>
+                        <h5>Batch Information</h5>
+                        <Row>
+                            <Col xs={5} >
+                                <InputText
+                                    type="text"
+                                    placeholder="Batch name"
+                                    value={name}
+                                    onChange={this.handleChangeInputName}
+                                    onKeyDown={this.handleKeyDown}
+                                />
+                            </Col>
+                            <Col xs={5} >
+                                <DateInput
+                                    date={date}
+                                    format='DDMMYYYY'
+                                    separator='-'
+                                    onChange={this.handleChangeInputDate}
+                                />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12} >
+                                <InputTextArea placeholder="Notes" value={this.state.notes} onChange={this.handleChangeInputNotes} />
+                            </Col>
+                        </Row>
+                        <p></p>
+                        <h5>Heat (Mild &lt;-&gt; Spicy)</h5>
+                        <Row>                            
+                            <Col xs={2} >
+                                <ReactSlider
+                                    className="horizontal-slider"
+                                    value={heat}
+                                    onChange={this.handleChangeHeat}
+                                    renderTrack={Track}
+                                    renderThumb={Thumb}
+                                />
+                            </Col>
+                        </Row>
+                    </Grid>
 
-                <Grid>
-                    <p></p>
-                    <h5>Ingredients</h5>
-                    <Row>
-                        <Col xs={6} >
-                            <IngredientTable onIngredientsChange={this.handleChangeIngredients} batchId={this.state.id} />
+                    <Grid>
+                        <p></p>
+                        <h5>Ingredients</h5>
+                        <Row>
+                            <Col xs={6} >
+                                <IngredientTable onIngredientsChange={this.handleChangeIngredients} batchId={this.state.id} />
+                            </Col>
+                        </Row>                        
+                    </Grid>
+                    
+                    <Grid>
+                        <Row>
+                        <Col xs={2} >
+                            <Button onClick={this.handleUpdateBatch} >Save</Button>
                         </Col>
-                    </Row>                        
-                </Grid>
-                
-                <Grid>
-                    <Row>
-                    <Col xs={2} >
-                        <Button onClick={this.handleUpdateBatch} >Save</Button>
-                    </Col>
-                    <Col xs={2}>
-                        <CancelButton onClick={this.handleCancel} >Cancel</CancelButton>
-                    </Col>
-                    </Row>
-                </Grid>
-                <p></p>
+                        <Col xs={2}>
+                            <CancelButton onClick={this.handleCancel} >Cancel</CancelButton>
+                        </Col>
+                        </Row>
+                    </Grid>
+                    <p></p>
+                </Wrapper>  
             </Wrapper>
         )
     }

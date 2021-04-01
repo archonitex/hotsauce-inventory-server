@@ -28,6 +28,11 @@ const InputText = styled.input.attrs({
 })`
     margin: 5px;
 `
+const InputTextArea = styled.textarea.attrs({
+    className: 'form-control',
+})`
+    margin: 5px;
+`
 
 const Button = styled.button.attrs({
     className: `btn btn-primary`,
@@ -78,6 +83,7 @@ class BatchInsert extends Component {
         this.state = {
             name: '',
             date: dateString,
+            notes: '',
             ingredients: [],
             heat: 0
         }
@@ -86,6 +92,11 @@ class BatchInsert extends Component {
     handleChangeInputName = async event => {
         const name = event.target.value
         this.setState({ name })
+    }
+
+    handleChangeInputNotes = async event => {
+        const notes = event.target.value
+        this.setState({ notes })
     }
 
     handleChangeInputDate = (newDate) => {
@@ -101,8 +112,8 @@ class BatchInsert extends Component {
     }
 
     handleIncludeBatch = async () => {
-        const { name, date, ingredients, heat } = this.state
-        const payload = { name, date, ingredients, heat }
+        const { name, date, notes, ingredients, heat } = this.state
+        const payload = { name, date, notes, ingredients, heat }
 
         await api.insertBatch(payload).then(res => {
             window.location.reload();
@@ -136,7 +147,7 @@ class BatchInsert extends Component {
                                     onKeyDown={this.handleKeyDown}
                                 />
                             </Col>
-                            <Col xs={5} xsOffset={2} >
+                            <Col xs={5} >
                                 <DateInput
                                     date={date}
                                     format='DDMMYYYY'
@@ -145,10 +156,15 @@ class BatchInsert extends Component {
                                 />
                             </Col>
                         </Row>
+                        <Row>
+                            <Col xs={12} >
+                                <InputTextArea  placeholder="Notes" onChange={this.handleChangeInputNotes} />
+                            </Col>
+                        </Row>
                         <p></p>
                         <h5>Heat (Mild &lt;-&gt; Spicy)</h5>
                         <Row>                            
-                            <Col xs={5} >
+                            <Col xs={2} >
                                 <ReactSlider
                                     className="horizontal-slider"
                                     onChange={this.handleChangeHeat}

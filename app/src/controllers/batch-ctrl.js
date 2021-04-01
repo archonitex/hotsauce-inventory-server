@@ -62,6 +62,7 @@ updateBatch = async (req, res) => {
 
         batch.name = body.name
         batch.date = body.date
+        batch.notes = body.notes
         batch.heat = body.heat
         batch.ingredients = body.ingredients
 
