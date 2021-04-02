@@ -120,7 +120,6 @@ class BatchUpdate extends Component {
         const { id, name, date, notes, ingredients, heat} = this.state
         var payload = { name, date, notes, ingredients, heat }        
 
-        debugger;
         await api.updateBatchById(id, payload).then(res => {
             window.location = '/batches'
         })

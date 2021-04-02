@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: '//volamtarpeppers.wrclan.ca' + (window.location.protocol === 'https:' ? ':3001' : ':3000') + '/api',
 })
 
 export const insertBatch = payload => api.post(`/batch`, payload)
