@@ -8,9 +8,11 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "bulma": "^0.9.2",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",
+    "react-bootstrap": "^1.5.2",
     "react-collapsible": "^2.8.3",
     "react-dom": "^17.0.2",
     "react-flexbox-grid": "^2.1.2",
@@ -28,6 +30,7 @@
   },
   "scripts": {
     "start": "PORT=8000 HTTPS=true SSL_CRT_FILE=~/letsencrypt/config/live/volamtarpeppers.wrclan.ca/fullchain.pem SSL_KEY_FILE=~/letsencrypt/config/live/volamtarpeppers.wrclan.ca/privkey.pem react-scripts start",
+    "start-dev": "PORT=8000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

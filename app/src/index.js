@@ -8,12 +8,8 @@ const morgan = require('morgan')
 
 const db = require('./db')
 const batchRouter = require('./routes/batch-router')
+const userRouter = require('./routes/user-router')
 const ingredientRouter = require('./routes/ingredient-router')
-
-var options = {
-    key: fs.readFileSync('/home/archon/letsencrypt/config/live/volamtarpeppers.wrclan.ca/privkey.pem'),
-    cert: fs.readFileSync('/home/archon/letsencrypt/config/live/volamtarpeppers.wrclan.ca/fullchain.pem'),
-};
 
 const app = express()
 
@@ -25,6 +21,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 app.use('/api', batchRouter)
 app.use('/api', ingredientRouter)
+app.use('/api', userRouter)
 
 app.use(morgan('combined'));
 
@@ -32,7 +29,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-  });
+});
 
 const httpPort = 3000
 const httpsPort = 3001
@@ -41,6 +38,13 @@ http.createServer(app).listen(httpPort, function(){
     console.log("HTTP server listening on port " + httpPort);
 });
 
-https.createServer(options, app).listen(httpsPort, function(){
+if(!process.argv.includes('dev')){
+  var options = {
+    key: fs.readFileSync('/home/archon/letsencrypt/config/live/volamtarpeppers.wrclan.ca/privkey.pem'),
+    cert: fs.readFileSync('/home/archon/letsencrypt/config/live/volamtarpeppers.wrclan.ca/fullchain.pem'),
+  };
+
+  https.createServer(options, app).listen(httpsPort, function(){
     console.log("HTTPS server listening on port " + httpsPort);
   });
+}

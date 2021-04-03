@@ -1,0 +1,28 @@
+.tag:not(body).is-primary {
+    background-color: #fc8c03;
+    color: #fff;
+}
+
+.button.is-primary.is-outlined {
+    background-color: transparent;
+    border-color: #fc8c03;
+    color: #fc8c03;
+}
+
+.button.is-primary {
+    background-color: #fc8c03;
+    border-color: transparent;
+    color: #fff;
+}
+
+.button.is-primary.is-outlined {
+    background-color: transparent;
+    border-color: #fc8c03;
+    color: #fc8c03;
+}
+
+.button.is-primary.is-outlined:hover, .button.is-primary.is-outlined.is-hovered, .button.is-primary.is-outlined:focus, .button.is-primary.is-outlined.is-focused {
+    background-color: #fc8c03;
+    border-color: #fc8c03;
+    color: #fff;
+}

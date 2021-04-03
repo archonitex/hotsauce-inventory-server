@@ -4,6 +4,8 @@ const api = axios.create({
     baseURL: '//volamtarpeppers.wrclan.ca' + (window.location.protocol === 'https:' ? ':3001' : ':3000') + '/api',
 })
 
+export const loginUser = payload => api.post('/login', payload)
+
 export const insertBatch = payload => api.post(`/batch`, payload)
 export const getAllBatches = () => api.get(`/batches`)
 export const updateBatchById = (id, payload) => api.put(`/batch/${id}`, payload)
@@ -15,6 +17,8 @@ export const getIngredients = () => api.get(`/ingredients`)
 export const insertIngredient = payload => api.post(`ingredient`, payload)
 
 const apis = {
+    loginUser,
+    
     insertBatch,
     getAllBatches,
     updateBatchById,

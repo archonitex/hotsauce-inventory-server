@@ -5,6 +5,8 @@ import moment from 'moment';
 import Collapsible from 'react-collapsible';
 import { Grid, Row, Col } from "react-flexbox-grid";
 import ReactSlider from 'react-slider'
+import { isAllowed, PERMISSIONS } from '../auth/auth';
+import Login from './Login'
 
 import styled from 'styled-components'
 import IngredientTable from '../components/IngredientTable';
@@ -86,7 +88,10 @@ class BatchUpdate extends Component {
             date: dateString,
             notes: '',
             heat: 0,
-            ingredients: []
+            ingredients: [],
+            stock: 0,
+            price: 0,
+            imageUrl: ''
         }
     }
 
@@ -102,6 +107,18 @@ class BatchUpdate extends Component {
 
     handleChangeInputDate = (newDate) => {
         this.setState({ date: newDate })
+    }
+
+    handleChangeImageUrl = async event => {
+        this.setState({ imageUrl: event.target.value })
+    }
+
+    handleChangePrice = async event => {
+        this.setState({ price: event.target.value })
+    }
+
+    handleChangeStock = async event => {
+        this.setState({ stock: event.target.value })
     }
 
     handleChangeIngredients = async ingredientsList => {
@@ -138,11 +155,26 @@ class BatchUpdate extends Component {
             notes: batch.data.data.notes || '',
             heat: batch.data.data.heat || 0,
             ingredients: batch.data.data.ingredients || [],
+            stock: batch.data.data.stock || 0,
+            price: batch.data.data.price || 0,
+            imageUrl: batch.data.data.imageUrl || ''
         })
     }
 
     render() {
-        const { name, date, notes, heat } = this.state
+        const { name, date, notes, heat, stock, price, imageUrl } = this.state
+        
+        if(!isAllowed(PERMISSIONS.CAN_EDIT_BATCHED)){
+            return (
+                <Wrapper>
+                    <Title>Permission Denied.</Title>
+                    <React.Fragment>
+                        <Login />
+                    </React.Fragment>
+                </Wrapper>
+            )
+        }
+
         return (
             <Wrapper>  
                 <Title>Edit Batch</Title> 
@@ -171,7 +203,7 @@ class BatchUpdate extends Component {
                         </Row>
                         <Row>
                             <Col xs={12} >
-                                <InputTextArea placeholder="Notes" value={this.state.notes} onChange={this.handleChangeInputNotes} />
+                                <InputTextArea placeholder="Notes" value={notes} onChange={this.handleChangeInputNotes} />
                             </Col>
                         </Row>
                         <p></p>
@@ -187,6 +219,37 @@ class BatchUpdate extends Component {
                                 />
                             </Col>
                         </Row>
+                    </Grid>
+
+                    <Grid>
+                        <p></p>
+                        <h5>Store Info</h5>
+                        <Row>
+                            <Col xs={1} >
+                                <h6>Price</h6>
+                                    <InputText
+                                        type="number"
+                                        value={price}
+                                        onChange={this.handleChangePrice}
+                                    />
+                            </Col>
+                            <Col xs={1} >
+                            <h6>Stock</h6>
+                                <InputText
+                                    type="number"
+                                    value={stock}
+                                    onChange={this.handleChangeStock}
+                                />
+                            </Col>
+                            <Col xs={4} >
+                            <h6>Image URL</h6>
+                                <InputText
+                                    type="text"
+                                    value={imageUrl}
+                                    onChange={this.handleChangeImageUrl}
+                                />
+                            </Col>
+                        </Row>                        
                     </Grid>
 
                     <Grid>

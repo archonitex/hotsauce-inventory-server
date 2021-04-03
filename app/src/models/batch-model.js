@@ -7,7 +7,10 @@ const Batch = new Schema(
         date: { type: Date, required: true },
         heat: { type: Number, required: true},
         ingredients: [ { ingredient: String, quantity: String } ],
-        notes: { type: String }
+        notes: { type: String },
+        imageUrl: { type: String },
+        stock: { type: Number },
+        price: { type: Number }
     },
     { timestamps: true },
 )

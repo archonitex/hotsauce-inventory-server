@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { authenticate, deauthenticate, isAuthenticated } from "../auth/auth";
 
 const Collapse = styled.div.attrs({
     className: 'collpase navbar-collapse',
@@ -14,8 +15,19 @@ const Item = styled.div.attrs({
     className: 'collpase navbar-collapse',
 })``
 
+function handleLogout(e) {
+    e.preventDefault();
+    deauthenticate()
+    window.location = '/'
+}
+
 class Links extends Component {
     render() {
+        let logout;
+        if(isAuthenticated()) { 
+            logout = <Link onClick={handleLogout} className="nav-link">Logout</Link> 
+        }
+
         return (
             <React.Fragment>
                 <Link to="/" className="navbar-brand">
@@ -24,9 +36,13 @@ class Links extends Component {
                 <Collapse>
                     <List>
                         <Item>
-                            <Link to="/batches" className="nav-link">
-                                Batches
+                            <Link to="/" className="nav-link">
+                                Order
                             </Link>
+                            <Link to="/batches" className="nav-link">
+                                Manage Batches
+                            </Link>
+                            {logout}
                         </Item>
                     </List>
                 </Collapse>

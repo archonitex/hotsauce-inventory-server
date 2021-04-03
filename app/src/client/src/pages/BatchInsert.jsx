@@ -84,6 +84,9 @@ class BatchInsert extends Component {
             name: '',
             date: dateString,
             notes: '',
+            imageUrl: '',
+            stock: 0,
+            price: 0,
             ingredients: [],
             heat: 0
         }
@@ -103,6 +106,18 @@ class BatchInsert extends Component {
         this.setState({ date: newDate })
     }
 
+    handleChangeImageUrl = async event => {
+        this.setState({ imageUrl: event.target.value })
+    }
+
+    handleChangePrice = async event => {
+        this.setState({ price: event.target.value })
+    }
+
+    handleChangeStock = async event => {
+        this.setState({ stock: event.target.value })
+    }
+
     handleChangeIngredients = async ingredientsList => {
         this.setState({ ingredients: ingredientsList })
     }
@@ -112,9 +127,11 @@ class BatchInsert extends Component {
     }
 
     handleIncludeBatch = async () => {
-        const { name, date, notes, ingredients, heat } = this.state
-        const payload = { name, date, notes, ingredients, heat }
+        const { name, date, notes, ingredients, heat, imageUrl, stock, price } = this.state
+        const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price }
 
+        console.log(payload)
+        debugger;
         await api.insertBatch(payload).then(res => {
             window.location.reload();
         })
@@ -131,7 +148,7 @@ class BatchInsert extends Component {
     }
 
     render() {
-        const { name, date } = this.state
+        const { name, date, notes, price, stock, imageUrl } = this.state
         return (
             <Wrapper>
                 <Collapsible trigger="Create Batch">
@@ -173,6 +190,37 @@ class BatchInsert extends Component {
                                 />
                             </Col>
                         </Row>
+                    </Grid>
+
+                    <Grid>
+                        <p></p>
+                        <h5>Store Info</h5>
+                        <Row>
+                            <Col xs={1} >
+                                <h6>Price</h6>
+                                    <InputText
+                                        type="number"
+                                        value={price}
+                                        onChange={this.handleChangePrice}
+                                    />
+                            </Col>
+                            <Col xs={1} >
+                            <h6>Stock</h6>
+                                <InputText
+                                    type="number"
+                                    value={stock}
+                                    onChange={this.handleChangeStock}
+                                />
+                            </Col>
+                            <Col xs={4} >
+                            <h6>Image URL</h6>
+                                <InputText
+                                    type="text"
+                                    value={imageUrl}
+                                    onChange={this.handleChangeImageUrl}
+                                />
+                            </Col>
+                        </Row>                        
                     </Grid>
 
                     <Grid>

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import api from '../api'
-import DateInput from 'react-input-date'
-import moment from 'moment';
 import BatchesList from './BatchesList'
 import BatchInsert from './BatchInsert'
+import Login from './Login'
+import { isAllowed, PERMISSIONS } from '../auth/auth';
 import styled from 'styled-components'
 
 const Title = styled.h2.attrs({
@@ -32,6 +31,17 @@ class BatchesHome extends Component {
     }
 
     render() {
+        if(!isAllowed(PERMISSIONS.CAN_EDIT_BATCHED)){
+            return (
+                <Wrapper>
+                    <Title>Permission Denied.</Title>
+                    <React.Fragment>
+                        <Login />
+                    </React.Fragment>
+                </Wrapper>
+            )
+        }
+
         return (
             <Wrapper>
                 <Title>New Batch</Title>
