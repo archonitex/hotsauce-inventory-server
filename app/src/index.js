@@ -22,6 +22,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 app.use('/api', batchRouter)
 app.use('/api', ingredientRouter)
 app.use('/api', userRouter)
+app.use(express.static(__dirname + '/public'));
 
 app.use(morgan('combined'));
 

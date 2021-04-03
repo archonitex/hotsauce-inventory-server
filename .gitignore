@@ -1,1 +1,4 @@
 node_modules/
+app/src/client/public/images/*.png
+app/src/client/public/images/*.jpg
+app/src/client/public/images/*.jpeg
