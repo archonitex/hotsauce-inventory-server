@@ -37,6 +37,24 @@ const ProductItem = props => {
             ) : (
               <small className="has-text-danger">Out Of Stock</small>
             )}
+            <div className="is-clearfix">
+              {product.stock > 0 ? (
+                <button
+                className="button is-small is-outlined is-primary   is-pulled-right"
+                onClick={() => {
+                    if(document.getElementsByClassName('Collapsible__trigger is-closed').length > 0){
+                      document.getElementsByClassName('Collapsible__trigger')[0].dispatchEvent(new MouseEvent("click",{bubbles: true, cancellable: true}));
+                    }
+
+                    var elmnt = document.getElementsByClassName('Collapsible__trigger')[0]
+                    elmnt.scrollIntoView();
+                  }}
+              >
+                Request Now
+              </button>
+              ) : (<div></div>)}
+              
+            </div>
           </div>
         </div>
       </div>

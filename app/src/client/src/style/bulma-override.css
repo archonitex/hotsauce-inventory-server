@@ -1,3 +1,17 @@
+.container, .bQnUxq, .bMfsTW {
+    max-width:100% !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.bMfsTW {
+    margin: 5px !important;
+    box-shadow: 5px 7px 10px #778899;
+}
+
+
+
+
 .tag:not(body).is-primary {
     background-color: #fc8c03;
     color: #fff;

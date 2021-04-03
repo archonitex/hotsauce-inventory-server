@@ -23,15 +23,15 @@ function handleLogout(e) {
 
 class Links extends Component {
     render() {
-        let logout;
+        let authItem;
         if(isAuthenticated()) { 
-            logout = <Link onClick={handleLogout} className="nav-link">Logout</Link> 
+            authItem = <Link onClick={handleLogout} className="nav-link">Logout</Link> 
         }
 
         return (
             <React.Fragment>
                 <Link to="/" className="navbar-brand">
-                    Hot Sauce Inventory
+                    Volamtar Peppers
                 </Link>
                 <Collapse>
                     <List>
@@ -40,9 +40,9 @@ class Links extends Component {
                                 Order
                             </Link>
                             <Link to="/batches" className="nav-link">
-                                Manage Batches
+                                Manage
                             </Link>
-                            {logout}
+                            {authItem}
                         </Item>
                     </List>
                 </Collapse>

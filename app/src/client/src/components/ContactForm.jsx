@@ -25,6 +25,7 @@ const Button = styled.button.attrs({
     className: `btn btn-primary`,
 })`
     margin: 15px 15px 15px 5px;
+    width: 100%;
 `
 
 class ContactForm extends Component {
@@ -59,6 +60,7 @@ class ContactForm extends Component {
         }
 
         await api.contactRequest(data).then(res => {
+            alert('Message sent!')
             window.location.reload();
         })
 
@@ -73,7 +75,7 @@ class ContactForm extends Component {
                     <Grid>
                         <p>Send us a message about what you'd like to get your hands on! We'll reach out to you super quickly!</p>
                         <Row>
-                            <Col xs={2} >
+                            <Col xs={6} lg={2} >
                                 <h6>Name</h6>
                                     <InputText
                                         type="text"
@@ -81,7 +83,7 @@ class ContactForm extends Component {
                                         onChange={this.handleChangeName}
                                     />
                             </Col>
-                            <Col xs={3} >
+                            <Col xs={6} lg={3} >
                             <h6>Email</h6>
                                 <InputText
                                     type="text"
@@ -91,9 +93,10 @@ class ContactForm extends Component {
                             </Col>
                         </Row> 
                         <Row>
-                            <Col xs={6}>
+                            <Col xs={12} lg={6}>
                                 <InputTextArea
-                                    placeholder="Your request"
+                                    maxLength="100"
+                                    placeholder="Your message (100 character limit)"
                                     onChange={this.handleChangeMessage}
                                 />    
                             </Col>    
@@ -102,9 +105,9 @@ class ContactForm extends Component {
 
                     <Grid>
                         <Row>
-                        <Col xs={2} >
-                            <Button onClick={this.handleSendRequest} >Send</Button>
-                        </Col>
+                            <Col xs={12} lg={2} >
+                                <Button onClick={this.handleSendRequest} >Send</Button>
+                            </Col>
                         </Row>
                     </Grid>
 

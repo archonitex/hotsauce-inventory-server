@@ -1,6 +1,12 @@
 
-#edit-batch-container, .Collapsible {
+.Collapsible {
   background-color: #1b97cc22;
+  cursor: pointer;
+}
+
+.Collapsible span{
+  font-size: 15pt;
+  font-weight: bold;
 }
 
 .Collapsible__contentInner {
