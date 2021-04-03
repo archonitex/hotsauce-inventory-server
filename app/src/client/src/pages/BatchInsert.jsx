@@ -94,12 +94,12 @@ class BatchInsert extends Component {
 
     handleChangeInputName = async event => {
         const name = event.target.value
-        this.setState({ name })
+        this.setState({ name: name })
     }
 
     handleChangeInputNotes = async event => {
         const notes = event.target.value
-        this.setState({ notes })
+        this.setState({ notes: notes })
     }
 
     handleChangeInputDate = (newDate) => {
@@ -111,11 +111,11 @@ class BatchInsert extends Component {
     }
 
     handleChangePrice = async event => {
-        this.setState({ price: event.target.value })
+        this.setState({ price: parseInt(event.target.value) })
     }
 
     handleChangeStock = async event => {
-        this.setState({ stock: event.target.value })
+        this.setState({ stock: parseInt(event.target.value) })
     }
 
     handleChangeIngredients = async ingredientsList => {
@@ -130,8 +130,6 @@ class BatchInsert extends Component {
         const { name, date, notes, ingredients, heat, imageUrl, stock, price } = this.state
         const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price }
 
-        console.log(payload)
-        debugger;
         await api.insertBatch(payload).then(res => {
             window.location.reload();
         })

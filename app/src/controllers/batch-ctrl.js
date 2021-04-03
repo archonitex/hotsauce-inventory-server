@@ -65,6 +65,9 @@ updateBatch = async (req, res) => {
         batch.notes = body.notes
         batch.heat = body.heat
         batch.ingredients = body.ingredients
+        batch.stock = body.stock
+        batch.price = body.price
+        batch.imageUrl = body.imageUrl
 
         batch
             .save()

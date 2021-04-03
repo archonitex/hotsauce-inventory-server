@@ -134,8 +134,8 @@ class BatchUpdate extends Component {
     }
 
     handleUpdateBatch = async () => {
-        const { id, name, date, notes, ingredients, heat} = this.state
-        var payload = { name, date, notes, ingredients, heat }        
+        const { id, name, date, notes, ingredients, heat, stock, price, imageUrl} = this.state
+        var payload = { name, date, notes, ingredients, heat, stock, price, imageUrl }        
 
         await api.updateBatchById(id, payload).then(res => {
             window.location = '/batches'

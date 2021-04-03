@@ -16,6 +16,8 @@ export const printBatchById = (id, payload) => api.post(`/batch/${id}/print`, pa
 export const getIngredients = () => api.get(`/ingredients`)
 export const insertIngredient = payload => api.post(`ingredient`, payload)
 
+export const contactRequest = payload => api.post('/contact', payload)
+
 const apis = {
     loginUser,
     
@@ -27,7 +29,9 @@ const apis = {
     printBatchById,
 
     getIngredients,
-    insertIngredient
+    insertIngredient,
+
+    contactRequest,
 }
 
 export default apis

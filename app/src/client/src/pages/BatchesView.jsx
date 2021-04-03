@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import api from '../api'
 import ProductItem from "../components/ProductItem";
+import ContactForm from "../components/ContactForm";
 import moment from 'moment';
 
 import ReactTable from "react-table-6"
@@ -37,6 +38,9 @@ class BatchesView extends Component {
 
         return (
             <Wrapper>
+                <Fragment>
+                    <ContactForm />
+                </Fragment>
                 <div className="container">
                     <div className="column columns is-multiline">
                     {batches && batches.length ? (
