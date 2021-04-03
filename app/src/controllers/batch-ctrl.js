@@ -68,6 +68,7 @@ updateBatch = async (req, res) => {
         batch.stock = body.stock
         batch.price = body.price
         batch.imageUrl = body.imageUrl
+        batch.status = body.status
 
         batch
             .save()
@@ -120,6 +121,20 @@ getBatchById = async (req, res) => {
 
 getBatches = async (req, res) => {
     await Batch.find({}, (err, batches) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+        if (!batches.length) {
+            return res
+                .status(204)
+                .json({ success: true, data: [] })
+        }
+        return res.status(200).json({ success: true, data: batches })
+    }).catch(err => console.log(err))
+}
+
+getActiveBatches = async (req, res) => {
+    await Batch.find({status: true}, (err, batches) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
@@ -187,6 +202,7 @@ module.exports = {
     updateBatch,
     deleteBatch,
     getBatches,
+    getActiveBatches,
     getBatchById,
 
     printBatchById,

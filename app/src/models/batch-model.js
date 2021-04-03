@@ -10,7 +10,8 @@ const Batch = new Schema(
         notes: { type: String },
         imageUrl: { type: String },
         stock: { type: Number },
-        price: { type: Number }
+        price: { type: Number },
+        status: { type: Boolean, default: true}
     },
     { timestamps: true },
 )
