@@ -1,4 +1,4 @@
 node_modules/
-app/src/client/public/images/*.png
-app/src/client/public/images/*.jpg
-app/src/client/public/images/*.jpeg
+app/src/public/images/*.png
+app/src/public/images/*.jpg
+app/src/public/images/*.jpeg
