@@ -6,3 +6,4 @@ import './TextInput.css';
 import "bulma/css/bulma.css";
 import './bulma-override.css';
 import './Product.css';
+import './Toggle.css';

@@ -84,10 +84,10 @@ class ContactForm extends Component {
                                     />
                             </Col>
                             <Col xs={6} lg={3} >
-                            <h6>Email</h6>
+                            <h6>Email or Phone</h6>
                                 <InputText
                                     type="text"
-                                    placeholder="email@email.com"
+                                    placeholder="Email or Phone Number"
                                     onChange={this.handleChangeEmail}
                                 />
                             </Col>

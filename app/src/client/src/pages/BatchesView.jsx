@@ -25,7 +25,7 @@ class BatchesView extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true })
 
-        await api.getAllBatches().then(batches => {
+        await api.getActiveBatches().then(batches => {
             this.setState({
                 batches: batches.data.data,
                 isLoading: false,

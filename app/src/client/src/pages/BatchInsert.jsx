@@ -5,6 +5,7 @@ import moment from 'moment';
 import Collapsible from 'react-collapsible';
 import { Grid, Row, Col } from "react-flexbox-grid";
 import ReactSlider from 'react-slider'
+import Toggle from 'react-toggle'
 
 import styled from 'styled-components'
 import IngredientTable from '../components/IngredientTable';
@@ -88,7 +89,8 @@ class BatchInsert extends Component {
             stock: 0,
             price: 0,
             ingredients: [],
-            heat: 0
+            heat: 0,
+            status: true,
         }
     }
 
@@ -126,9 +128,13 @@ class BatchInsert extends Component {
         this.setState({ heat: newHeat })
     }
 
+    handleChangeStatus = async event => {
+        this.setState({ status: event.target.value })
+    }
+
     handleIncludeBatch = async () => {
-        const { name, date, notes, ingredients, heat, imageUrl, stock, price } = this.state
-        const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price }
+        const { name, date, notes, ingredients, heat, imageUrl, stock, price, status } = this.state
+        const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price, status }
 
         await api.insertBatch(payload).then(res => {
             window.location.reload();
@@ -146,14 +152,15 @@ class BatchInsert extends Component {
     }
 
     render() {
-        const { name, date, notes, price, stock, imageUrl } = this.state
+        const { name, date, notes, price, stock, imageUrl, status } = this.state
         return (
             <Wrapper>
                 <Collapsible trigger="Create Batch">
                     <Grid>
-                        <h5>Batch Information</h5>
+                        <h5>Batch Info</h5>
                         <Row>
-                            <Col xs={5} >
+                            <Col xs={4} >
+                                <h6>Batch Name</h6>
                                 <InputText
                                     type="text"
                                     placeholder="Batch name"
@@ -162,7 +169,8 @@ class BatchInsert extends Component {
                                     onKeyDown={this.handleKeyDown}
                                 />
                             </Col>
-                            <Col xs={5} >
+                            <Col xs={2} >
+                                <h6>Batch Date</h6>
                                 <DateInput
                                     date={date}
                                     format='DDMMYYYY'
@@ -170,16 +178,8 @@ class BatchInsert extends Component {
                                     onChange={this.handleChangeInputDate}
                                 />
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12} >
-                                <InputTextArea  placeholder="Notes" onChange={this.handleChangeInputNotes} />
-                            </Col>
-                        </Row>
-                        <p></p>
-                        <h5>Heat (Mild &lt;-&gt; Spicy)</h5>
-                        <Row>                            
-                            <Col xs={2} >
+                            <Col xs={3} >
+                                <h6>Heat (Mild &lt;-&gt; Spicy)</h6>
                                 <ReactSlider
                                     className="horizontal-slider"
                                     onChange={this.handleChangeHeat}
@@ -188,10 +188,16 @@ class BatchInsert extends Component {
                                 />
                             </Col>
                         </Row>
+                        <Row>
+                            <Col xs={10} >
+                                <h6>Notes</h6>
+                                <InputTextArea  placeholder="Notes" onChange={this.handleChangeInputNotes} />
+                            </Col>
+                        </Row>
                     </Grid>
 
                     <Grid>
-                        <p></p>
+                        <p><br/></p>
                         <h5>Store Info</h5>
                         <Row>
                             <Col xs={1} >
@@ -199,6 +205,7 @@ class BatchInsert extends Component {
                                     <InputText
                                         type="number"
                                         value={price}
+                                        min="0"
                                         onChange={this.handleChangePrice}
                                     />
                             </Col>
@@ -207,18 +214,28 @@ class BatchInsert extends Component {
                                 <InputText
                                     type="number"
                                     value={stock}
+                                    min="0"
                                     onChange={this.handleChangeStock}
                                 />
                             </Col>
-                            <Col xs={4} >
-                            <h6>Image URL</h6>
+                            <Col xs={2} >
+                                <h6>Store Status</h6>
+                                <Toggle
+                                    defaultChecked={status}
+                                    onChange={this.handleChangeStatus}
+                                />
+                            </Col>
+                        </Row>     
+                        <Row>
+                            <Col xs={6} >
+                                <h6>Image URL</h6>
                                 <InputText
                                     type="text"
                                     value={imageUrl}
                                     onChange={this.handleChangeImageUrl}
                                 />
                             </Col>
-                        </Row>                        
+                        </Row>                   
                     </Grid>
 
                     <Grid>

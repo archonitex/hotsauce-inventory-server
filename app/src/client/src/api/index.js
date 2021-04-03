@@ -8,6 +8,7 @@ export const loginUser = payload => api.post('/login', payload)
 
 export const insertBatch = payload => api.post(`/batch`, payload)
 export const getAllBatches = () => api.get(`/batches`)
+export const getActiveBatches = () => api.get('/batches/active')
 export const updateBatchById = (id, payload) => api.put(`/batch/${id}`, payload)
 export const deleteBatchById = id => api.delete(`/batch/${id}`)
 export const getBatchById = id => api.get(`/batch/${id}`)
@@ -23,6 +24,7 @@ const apis = {
     
     insertBatch,
     getAllBatches,
+    getActiveBatches,
     updateBatchById,
     deleteBatchById,
     getBatchById,

@@ -7,6 +7,7 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 import ReactSlider from 'react-slider'
 import { isAllowed, PERMISSIONS } from '../auth/auth';
 import Login from './Login'
+import Toggle from 'react-toggle'
 
 import styled from 'styled-components'
 import IngredientTable from '../components/IngredientTable';
@@ -91,7 +92,8 @@ class BatchUpdate extends Component {
             ingredients: [],
             stock: 0,
             price: 0,
-            imageUrl: ''
+            imageUrl: '',
+            status: true,
         }
     }
 
@@ -129,13 +131,17 @@ class BatchUpdate extends Component {
         this.setState({ heat: newHeat })
     }
 
+    handleChangeStatus = async event => {
+        this.setState({ status: event.target.checked })
+    }
+
     handleCancel = async () => {
         window.location = '/batches'
     }
 
     handleUpdateBatch = async () => {
-        const { id, name, date, notes, ingredients, heat, stock, price, imageUrl} = this.state
-        var payload = { name, date, notes, ingredients, heat, stock, price, imageUrl }        
+        const { id, name, date, notes, ingredients, heat, stock, price, imageUrl, status} = this.state
+        var payload = { name, date, notes, ingredients, heat, stock, price, imageUrl, status }        
 
         await api.updateBatchById(id, payload).then(res => {
             window.location = '/batches'
@@ -157,12 +163,13 @@ class BatchUpdate extends Component {
             ingredients: batch.data.data.ingredients || [],
             stock: batch.data.data.stock || 0,
             price: batch.data.data.price || 0,
-            imageUrl: batch.data.data.imageUrl || ''
+            imageUrl: batch.data.data.imageUrl || '',
+            status: batch.data.data.status
         })
     }
 
     render() {
-        const { name, date, notes, heat, stock, price, imageUrl } = this.state
+        const { name, date, notes, heat, stock, price, imageUrl, status } = this.state
         
         if(!isAllowed(PERMISSIONS.CAN_EDIT_BATCHED)){
             return (
@@ -183,7 +190,8 @@ class BatchUpdate extends Component {
                     <Grid>
                         <h5>Batch Information</h5>
                         <Row>
-                            <Col xs={5} >
+                            <Col xs={4} >
+                                <h6>Batch Name</h6>
                                 <InputText
                                     type="text"
                                     placeholder="Batch name"
@@ -192,7 +200,8 @@ class BatchUpdate extends Component {
                                     onKeyDown={this.handleKeyDown}
                                 />
                             </Col>
-                            <Col xs={5} >
+                            <Col xs={2} >
+                                <h6>Batch Date</h6>
                                 <DateInput
                                     date={date}
                                     format='DDMMYYYY'
@@ -200,23 +209,19 @@ class BatchUpdate extends Component {
                                     onChange={this.handleChangeInputDate}
                                 />
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12} >
-                                <InputTextArea placeholder="Notes" value={notes} onChange={this.handleChangeInputNotes} />
-                            </Col>
-                        </Row>
-                        <p></p>
-                        <h5>Heat (Mild &lt;-&gt; Spicy)</h5>
-                        <Row>                            
-                            <Col xs={2} >
+                            <Col xs={3} >
+                                <h6>Heat (Mild &lt;-&gt; Spicy)</h6>
                                 <ReactSlider
                                     className="horizontal-slider"
-                                    value={heat}
                                     onChange={this.handleChangeHeat}
                                     renderTrack={Track}
                                     renderThumb={Thumb}
                                 />
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={10} >
+                                <InputTextArea placeholder="Notes" value={notes} onChange={this.handleChangeInputNotes} />
                             </Col>
                         </Row>
                     </Grid>
@@ -225,11 +230,12 @@ class BatchUpdate extends Component {
                         <p></p>
                         <h5>Store Info</h5>
                         <Row>
-                            <Col xs={1} >
+                        <Col xs={1} >
                                 <h6>Price</h6>
                                     <InputText
                                         type="number"
                                         value={price}
+                                        min="0"
                                         onChange={this.handleChangePrice}
                                     />
                             </Col>
@@ -238,18 +244,28 @@ class BatchUpdate extends Component {
                                 <InputText
                                     type="number"
                                     value={stock}
+                                    min="0"
                                     onChange={this.handleChangeStock}
                                 />
                             </Col>
-                            <Col xs={4} >
-                            <h6>Image URL</h6>
+                            <Col xs={2} >
+                                <h6>Store Status</h6>
+                                <Toggle
+                                    checked={status}
+                                    onChange={this.handleChangeStatus}
+                                />
+                            </Col>
+                        </Row>     
+                        <Row>
+                            <Col xs={6} >
+                                <h6>Image URL</h6>
                                 <InputText
                                     type="text"
                                     value={imageUrl}
                                     onChange={this.handleChangeImageUrl}
                                 />
                             </Col>
-                        </Row>                        
+                        </Row>                    
                     </Grid>
 
                     <Grid>
