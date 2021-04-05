@@ -30,7 +30,7 @@ createBatch = (req, res) => {
 
     //Check for image
     if(body.imageName){
-        body.imageUrl = '//volamtarpeppers.wrclan.com:3001/images/' + body.imageName
+        body.imageUrl = '//volamtarpeppers.wrclan.ca:3001/images/' + body.imageName
         delete body.imageName
     }
 
@@ -79,7 +79,7 @@ updateBatch = async (req, res) => {
         
         //Check for image
         if(body.imageName){
-            body.imageUrl = '//volamtarpeppers.wrclan.com:3001/images/' + body.imageName
+            body.imageUrl = '//volamtarpeppers.wrclan.ca:3001/images/' + body.imageName
             delete body.imageName
         }
 
