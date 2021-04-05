@@ -221,6 +221,7 @@ class BatchUpdate extends Component {
                                 <ReactSlider
                                     className="horizontal-slider"
                                     onChange={this.handleChangeHeat}
+                                    value={heat}
                                     renderTrack={Track}
                                     renderThumb={Thumb}
                                 />
