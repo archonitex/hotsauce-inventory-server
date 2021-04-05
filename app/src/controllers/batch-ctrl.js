@@ -69,6 +69,7 @@ updateBatch = async (req, res) => {
         batch.price = body.price
         batch.imageUrl = body.imageUrl
         batch.status = body.status
+        batch.storeDescription = body.storeDescription;
 
         batch
             .save()

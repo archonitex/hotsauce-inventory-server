@@ -11,7 +11,8 @@ const Batch = new Schema(
         imageUrl: { type: String },
         stock: { type: Number },
         price: { type: Number },
-        status: { type: Boolean, default: true}
+        storeDescription: { type: String, default: '' },
+        status: { type: Boolean, default: true},
     },
     { timestamps: true },
 )

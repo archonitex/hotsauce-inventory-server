@@ -1,6 +1,19 @@
 import React from "react";
+import styled from 'styled-components'
 
-const ProductItem = props => {
+const HeatPeppers = styled.div`
+  display:block
+`;
+const OnHeatPeppers = styled.div`
+  float:left;
+  opacity:1;
+`;
+
+const OffHeatPeppers = styled.div`
+  opacity: 0.15;
+`;
+
+const ProductListItem = props => {
   const { product } = props;
 
   //Heat
@@ -8,6 +21,11 @@ const ProductItem = props => {
   let numberOfPeppers = Math.round(parseFloat(product.heat/20))
   for (var i=0; i < numberOfPeppers; i++) {
     heatString += "🌶️"
+  }
+
+  var offHeatString = '&nbsp;'
+  for (var i=numberOfPeppers; i<5; i++){
+    offHeatString += "🌶️"
   }
 
   //Ingredients
@@ -27,10 +45,15 @@ const ProductItem = props => {
           </div>
           <div className="media-content">
             <b style={{ textTransform: "capitalize" }}>
-              {product.name}{" "}
+              <a onClick={() =>{
+                window.location = "/product/" + product._id
+              }}  >{product.name}{" "}</a>
               <span className="tag is-primary">${product.price || 'TBD'}</span>
             </b>
-            <div>{heatString}</div>
+            <HeatPeppers>
+              <OnHeatPeppers >{heatString}</OnHeatPeppers>
+              <OffHeatPeppers dangerouslySetInnerHTML={{ __html: offHeatString }} />
+            </HeatPeppers>
             <div>{ingredientsString}</div>
             {product.stock > 0 ? (
               <small>{product.stock + " Available"}</small>
@@ -38,6 +61,15 @@ const ProductItem = props => {
               <small className="has-text-danger">Out Of Stock</small>
             )}
             <div className="is-clearfix">
+              <button
+                class="button is-small is-outlined is-primary   is-pulled-left"
+                onClick={() =>{
+                  window.location = "/product/" + product._id
+                }}
+              >
+              More Info
+              </button>
+              
               {product.stock > 0 ? (
                 <button
                 className="button is-small is-outlined is-primary   is-pulled-right"
@@ -62,4 +94,4 @@ const ProductItem = props => {
   );
 };
 
-export default ProductItem;
+export default ProductListItem;

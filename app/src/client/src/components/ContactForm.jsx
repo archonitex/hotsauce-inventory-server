@@ -75,7 +75,7 @@ class ContactForm extends Component {
                     <Grid>
                         <p>Send us a message about what you'd like to get your hands on! We'll reach out to you super quickly!</p>
                         <Row>
-                            <Col xs={6} lg={2} >
+                            <Col xs={6} lg={3} >
                                 <h6>Name</h6>
                                     <InputText
                                         type="text"
@@ -83,7 +83,7 @@ class ContactForm extends Component {
                                         onChange={this.handleChangeName}
                                     />
                             </Col>
-                            <Col xs={6} lg={3} >
+                            <Col xs={6} lg={5} >
                             <h6>Email or Phone</h6>
                                 <InputText
                                     type="text"
@@ -93,7 +93,7 @@ class ContactForm extends Component {
                             </Col>
                         </Row> 
                         <Row>
-                            <Col xs={12} lg={6}>
+                            <Col xs={12} lg={8}>
                                 <InputTextArea
                                     maxLength="100"
                                     placeholder="Your message (100 character limit)"

@@ -90,6 +90,7 @@ class BatchInsert extends Component {
             price: 0,
             ingredients: [],
             heat: 0,
+            storeDescription: '',
             status: true,
         }
     }
@@ -102,6 +103,11 @@ class BatchInsert extends Component {
     handleChangeInputNotes = async event => {
         const notes = event.target.value
         this.setState({ notes: notes })
+    }
+
+    handleChangeInputStoreDescription = async event => {
+        const storeDescription = event.target.value
+        this.setState({ storeDescription: storeDescription })
     }
 
     handleChangeInputDate = (newDate) => {
@@ -133,8 +139,8 @@ class BatchInsert extends Component {
     }
 
     handleIncludeBatch = async () => {
-        const { name, date, notes, ingredients, heat, imageUrl, stock, price, status } = this.state
-        const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price, status }
+        const { name, date, notes, ingredients, heat, imageUrl, stock, price, status, storeDescription } = this.state
+        const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price, status, storeDescription }
 
         await api.insertBatch(payload).then(res => {
             window.location.reload();
@@ -235,7 +241,13 @@ class BatchInsert extends Component {
                                     onChange={this.handleChangeImageUrl}
                                 />
                             </Col>
-                        </Row>                   
+                        </Row>  
+                        <Row>
+                            <Col xs={10} >
+                                <h6>Description</h6>
+                                <InputTextArea  placeholder="Description" onChange={this.handleChangeInputStoreDescription} />
+                            </Col>
+                        </Row>                 
                     </Grid>
 
                     <Grid>

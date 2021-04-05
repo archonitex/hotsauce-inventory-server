@@ -93,6 +93,7 @@ class BatchUpdate extends Component {
             stock: 0,
             price: 0,
             imageUrl: '',
+            storeDescription: '',
             status: true,
         }
     }
@@ -105,6 +106,11 @@ class BatchUpdate extends Component {
     handleChangeInputNotes = async event => {
         const notes = event.target.value
         this.setState({ notes })
+    }
+
+    handleChangeInputStoreDescription = async event => {
+        const storeDescription = event.target.value
+        this.setState({ storeDescription })
     }
 
     handleChangeInputDate = (newDate) => {
@@ -140,8 +146,8 @@ class BatchUpdate extends Component {
     }
 
     handleUpdateBatch = async () => {
-        const { id, name, date, notes, ingredients, heat, stock, price, imageUrl, status} = this.state
-        var payload = { name, date, notes, ingredients, heat, stock, price, imageUrl, status }        
+        const { id, name, date, notes, ingredients, heat, stock, price, imageUrl, status, storeDescription} = this.state
+        var payload = { name, date, notes, ingredients, heat, stock, price, imageUrl, status, storeDescription }        
 
         await api.updateBatchById(id, payload).then(res => {
             window.location = '/batches'
@@ -164,12 +170,13 @@ class BatchUpdate extends Component {
             stock: batch.data.data.stock || 0,
             price: batch.data.data.price || 0,
             imageUrl: batch.data.data.imageUrl || '',
+            storeDescription: batch.data.data.storeDescription || '',
             status: batch.data.data.status
         })
     }
 
     render() {
-        const { name, date, notes, heat, stock, price, imageUrl, status } = this.state
+        const { name, date, notes, heat, stock, price, imageUrl, status, storeDescription } = this.state
         
         if(!isAllowed(PERMISSIONS.CAN_EDIT_BATCHED)){
             return (
@@ -265,7 +272,13 @@ class BatchUpdate extends Component {
                                     onChange={this.handleChangeImageUrl}
                                 />
                             </Col>
-                        </Row>                    
+                        </Row>  
+                        <Row>
+                            <Col xs={10} >
+                                <h6>Description</h6>
+                                <InputTextArea placeholder="Description" value={storeDescription} onChange={this.handleChangeInputStoreDescription} />
+                            </Col>
+                        </Row>                  
                     </Grid>
 
                     <Grid>

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import api from '../api'
-import ProductItem from "../components/ProductItem";
+import ProductListItem from "../components/ProductListItem";
 import ContactForm from "../components/ContactForm";
 import moment from 'moment';
 
@@ -45,7 +45,7 @@ class BatchesView extends Component {
                     <div className="column columns is-multiline">
                     {batches && batches.length ? (
                         batches.map((product, index) => (
-                        <ProductItem
+                        <ProductListItem
                             product={product}
                             key={index}
                         />

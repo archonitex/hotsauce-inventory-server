@@ -2,6 +2,7 @@
 .Collapsible {
   background-color: #1b97cc22;
   cursor: pointer;
+  box-shadow: 4px 7px 21px 4px #aaaaaa
 }
 
 .Collapsible span{
