@@ -8,6 +8,7 @@ import ReactSlider from 'react-slider'
 import { isAllowed, PERMISSIONS } from '../auth/auth';
 import Login from './Login'
 import Toggle from 'react-toggle'
+import axios from 'axios';
 
 import styled from 'styled-components'
 import IngredientTable from '../components/IngredientTable';
@@ -92,7 +93,7 @@ class BatchUpdate extends Component {
             ingredients: [],
             stock: 0,
             price: 0,
-            imageUrl: '',
+            imageName: '',
             storeDescription: '',
             status: true,
         }
@@ -117,8 +118,21 @@ class BatchUpdate extends Component {
         this.setState({ date: newDate })
     }
 
-    handleChangeImageUrl = async event => {
-        this.setState({ imageUrl: event.target.value })
+    handleChangeImage = async event => {
+        const fileName = event.target.value.split(/(\\|\/)/g).pop()
+        this.setState({
+            imageName: fileName
+        });
+
+        if(fileName == ""){
+            return
+        }
+
+        const data = new FormData() 
+        data.append('file', event.target.files[0])
+
+        let baseURL = '//volamtarpeppers.wrclan.ca' + (window.location.protocol === 'https:' ? ':3001' : ':3000') + '/api'
+        axios.post(baseURL + "/upload", data, {})
     }
 
     handleChangePrice = async event => {
@@ -146,8 +160,8 @@ class BatchUpdate extends Component {
     }
 
     handleUpdateBatch = async () => {
-        const { id, name, date, notes, ingredients, heat, stock, price, imageUrl, status, storeDescription} = this.state
-        var payload = { name, date, notes, ingredients, heat, stock, price, imageUrl, status, storeDescription }        
+        const { id, name, date, notes, ingredients, heat, stock, price, imageName, status, storeDescription} = this.state
+        var payload = { name, date, notes, ingredients, heat, stock, price, imageName, status, storeDescription }        
 
         await api.updateBatchById(id, payload).then(res => {
             window.location = '/batches'
@@ -169,14 +183,14 @@ class BatchUpdate extends Component {
             ingredients: batch.data.data.ingredients || [],
             stock: batch.data.data.stock || 0,
             price: batch.data.data.price || 0,
-            imageUrl: batch.data.data.imageUrl || '',
+            imageName: '',
             storeDescription: batch.data.data.storeDescription || '',
             status: batch.data.data.status
         })
     }
 
     render() {
-        const { name, date, notes, heat, stock, price, imageUrl, status, storeDescription } = this.state
+        const { name, date, notes, heat, stock, price, status, storeDescription } = this.state
         
         if(!isAllowed(PERMISSIONS.CAN_EDIT_BATCHED)){
             return (
@@ -266,12 +280,8 @@ class BatchUpdate extends Component {
                         </Row>     
                         <Row>
                             <Col xs={6} >
-                                <h6>Image URL</h6>
-                                <InputText
-                                    type="text"
-                                    value={imageUrl}
-                                    onChange={this.handleChangeImageUrl}
-                                />
+                                <h6>Image</h6>
+                                <input type="file" onChange={this.handleChangeImage}/>
                             </Col>
                         </Row>  
                         <Row>

@@ -6,6 +6,9 @@ import Collapsible from 'react-collapsible';
 import { Grid, Row, Col } from "react-flexbox-grid";
 import ReactSlider from 'react-slider'
 import Toggle from 'react-toggle'
+import ImageUploader from 'react-images-upload';
+import axios from 'axios';
+
 
 import styled from 'styled-components'
 import IngredientTable from '../components/IngredientTable';
@@ -85,7 +88,7 @@ class BatchInsert extends Component {
             name: '',
             date: dateString,
             notes: '',
-            imageUrl: '',
+            imageName: '',
             stock: 0,
             price: 0,
             ingredients: [],
@@ -114,10 +117,6 @@ class BatchInsert extends Component {
         this.setState({ date: newDate })
     }
 
-    handleChangeImageUrl = async event => {
-        this.setState({ imageUrl: event.target.value })
-    }
-
     handleChangePrice = async event => {
         this.setState({ price: parseInt(event.target.value) })
     }
@@ -138,9 +137,26 @@ class BatchInsert extends Component {
         this.setState({ status: event.target.value })
     }
 
+    handleChangeImage = async event => {
+        const fileName = event.target.value.split(/(\\|\/)/g).pop()
+        this.setState({
+            imageName: fileName
+        });
+
+        if(fileName == ""){
+            return
+        }
+
+        const data = new FormData() 
+        data.append('file', event.target.files[0])
+
+        let baseURL = '//volamtarpeppers.wrclan.ca' + (window.location.protocol === 'https:' ? ':3001' : ':3000') + '/api'
+        axios.post(baseURL + "/upload", data, {})
+    }
+
     handleIncludeBatch = async () => {
-        const { name, date, notes, ingredients, heat, imageUrl, stock, price, status, storeDescription } = this.state
-        const payload = { name, date, notes, ingredients, heat, imageUrl, stock, price, status, storeDescription }
+        const { name, date, notes, ingredients, heat, imageName, stock, price, status, storeDescription } = this.state
+        const payload = { name, date, notes, ingredients, heat, imageName, stock, price, status, storeDescription }
 
         await api.insertBatch(payload).then(res => {
             window.location.reload();
@@ -234,12 +250,8 @@ class BatchInsert extends Component {
                         </Row>     
                         <Row>
                             <Col xs={6} >
-                                <h6>Image URL</h6>
-                                <InputText
-                                    type="text"
-                                    value={imageUrl}
-                                    onChange={this.handleChangeImageUrl}
-                                />
+                                <h6>Image</h6>
+                                <input type="file" onChange={this.handleChangeImage}/>
                             </Col>
                         </Row>  
                         <Row>

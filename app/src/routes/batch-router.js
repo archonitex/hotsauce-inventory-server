@@ -13,4 +13,6 @@ router.get('/batches/active', BatchCtrl.getActiveBatches)
 
 router.post('/batch/:id/print', BatchCtrl.printBatchById)
 
+router.post('/upload', BatchCtrl.MulterUpload)
+
 module.exports = router

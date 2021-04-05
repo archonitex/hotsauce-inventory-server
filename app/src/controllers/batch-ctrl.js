@@ -1,8 +1,19 @@
 const Batch = require('../models/batch-model')
 const path = require("path");
 var moment = require('moment')
+var multer = require('multer')
 var fs = require('fs')
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, path.resolve(__dirname, '../../../images'))
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname )
+  }
+})
+
+MulterUpload = multer({ storage: storage }).single('file')
 
 createBatch = (req, res) => {
     const body = req.body
@@ -16,6 +27,12 @@ createBatch = (req, res) => {
 
     //Fix date format
     body.date = moment(body.date, 'DD-MM-YYYY')
+
+    //Check for image
+    if(body.imageName){
+        body.imageUrl = '//volamtarpeppers.wrclan.com:3001/images/' + body.imageName
+        delete body.imageName
+    }
 
     const batch = new Batch(body)
 
@@ -59,6 +76,12 @@ updateBatch = async (req, res) => {
         }
         //Fix date format
         body.date = moment(body.date, 'DD-MM-YYYY')
+        
+        //Check for image
+        if(body.imageName){
+            body.imageUrl = '//volamtarpeppers.wrclan.com:3001/images/' + body.imageName
+            delete body.imageName
+        }
 
         batch.name = body.name
         batch.date = body.date
@@ -67,8 +90,8 @@ updateBatch = async (req, res) => {
         batch.ingredients = body.ingredients
         batch.stock = body.stock
         batch.price = body.price
-        batch.imageUrl = body.imageUrl
         batch.status = body.status
+        batch.imageUrl = body.imageUrl
         batch.storeDescription = body.storeDescription;
 
         batch
@@ -200,6 +223,7 @@ printBatchById = async (req, res) => {
 
 module.exports = {
     createBatch,
+    MulterUpload,
     updateBatch,
     deleteBatch,
     getBatches,

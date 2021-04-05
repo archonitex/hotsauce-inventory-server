@@ -2,3 +2,4 @@ node_modules/
 app/src/public/images/*.png
 app/src/public/images/*.jpg
 app/src/public/images/*.jpeg
+images/*.*
