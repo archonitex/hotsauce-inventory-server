@@ -134,7 +134,7 @@ class BatchInsert extends Component {
     }
 
     handleChangeStatus = async event => {
-        this.setState({ status: event.target.value })
+        this.setState({ status: event.target.checked })
     }
 
     handleChangeImage = async event => {
