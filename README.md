@@ -55,6 +55,7 @@ To get a local copy up and running follow these simple steps.
 ### Dependencies
 - [MongoDB](https://www.mongodb.com/)
 - [NodeJS](https://nodejs.org/en/)
+- [NoDemon](https://nodemon.io/)
 
 ### Prerequisites
 
@@ -78,6 +79,18 @@ To get a local copy up and running follow these simple steps.
   cd app/src/client
   npm install
   ```
+
+## Local Development
+During development, ensure your computer's host file has been edited to point `volamtarpeppers.wrclan.ca` to 127.0.0.1
+
+To start the server for a dev environment, use the provided startup shell script.
+
+* shell
+  ```sh
+  cd app/
+  sh startup-dev.sh
+  ```
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
