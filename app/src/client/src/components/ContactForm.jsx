@@ -79,7 +79,7 @@ class ContactForm extends Component {
                                 <h6>Name</h6>
                                     <InputText
                                         type="text"
-                                        placeholder="Name"
+                                        placeholder=""
                                         onChange={this.handleChangeName}
                                     />
                             </Col>
@@ -87,7 +87,7 @@ class ContactForm extends Component {
                             <h6>Email or Phone</h6>
                                 <InputText
                                     type="text"
-                                    placeholder="Email or Phone Number"
+                                    placeholder=""
                                     onChange={this.handleChangeEmail}
                                 />
                             </Col>
