@@ -41,10 +41,19 @@
 /* Mobile Devices */
 @media only screen and (max-width: 600px) {
     .lhVpkI {
-        padding: 10px 0px 0px 0px !important; 
+        padding: 20px 0px 20px 0px !important; 
     }
 
     .cYOqIb {
         margin: 0 5px !important;
+    }
+
+    .hLNwKA {
+        margin: 0 5px !important;
+        padding: 20px 0 20px 0 !important;
+    }
+
+    .iPjwpv {
+        padding: 40px 0 20px 0 !important; 
     }
 }

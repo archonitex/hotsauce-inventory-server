@@ -134,18 +134,6 @@ class ProductView extends Component {
 
                                 </IngredientList>
                             </Tab>
-                            {product.stock > 0 ? (
-                                <Tab eventKey="request" title="Request">
-                                    <Fragment>
-                                        <ContactForm />
-                                    </Fragment> 
-                                </Tab>
-                            ) : (
-                                <Tab eventKey="request" title="Request - Out Of Stock" disabled>
-                               
-                                </Tab>
-                            )}
-                            
                         </Tabs>
                     </RightContainerItem>
                 </Container>
