@@ -50,7 +50,7 @@ function App() {
                     openExternal: true,
                 },
                 ]}
-                bottom="Made with ❤️ by Francis Carriere"
+                bottom="Made with 🌶️❤️ by Francis Carriere"
             />
         </Router>
     )

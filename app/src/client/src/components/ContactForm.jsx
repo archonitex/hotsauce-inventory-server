@@ -71,7 +71,7 @@ class ContactForm extends Component {
     render() {
         return (
             <Wrapper>
-                <Collapsible trigger="Send Us A Request">
+                <Collapsible trigger="Send Us A Request ⇕">
                     <Grid>
                         <p>Send us a message about what you'd like to get your hands on! We'll reach out to you super quickly!</p>
                         <Row>
