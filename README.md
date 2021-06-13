@@ -93,9 +93,9 @@ To start the server, use the provided startup shell script.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@FCArchon](https://twitter.com/FCArchon) - senatorsfc@gmail.com
+Francis Carriere - [@FCArchon](https://twitter.com/FCArchon) - senatorsfc@gmail.com
 
-Project Link: [https://github.com/franciscarriere/hotsauce-inventory](https://github.com/franciscarriere/hotsauce-inventory)
+[https://github.com/franciscarriere/hotsauce-inventory](https://github.com/franciscarriere/hotsauce-inventory)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
