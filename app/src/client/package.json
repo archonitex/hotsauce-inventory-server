@@ -33,11 +33,11 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true PORT=8000 HTTPS=true SSL_CRT_FILE=~/letsencrypt/config/live/volamtarpeppers.wrclan.ca/fullchain.pem SSL_KEY_FILE=~/letsencrypt/config/live/volamtarpeppers.wrclan.ca/privkey.pem react-scripts start",
-    "start-dev": "DANGEROUSLY_DISABLE_HOST_CHECK=true PORT=8000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true PORT=8000 HTTPS=true SSL_CRT_FILE=~/letsencrypt/config/live/volamtarpeppers.wrclan.ca/fullchain.pem SSL_KEY_FILE=~/letsencrypt/config/live/volamtarpeppers.wrclan.ca/privkey.pem react-app-rewired start",
+    "start-dev": "DANGEROUSLY_DISABLE_HOST_CHECK=true PORT=8000 react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": [
@@ -58,6 +58,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-slider": "^1.1.1"
+    "@types/react-slider": "^1.1.1",
+    "react-app-rewired": "^2.1.8"
   }
 }
