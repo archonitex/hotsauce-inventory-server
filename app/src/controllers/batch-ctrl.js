@@ -222,12 +222,15 @@ printBatchById = async (req, res) => {
 
         //Execute
         const { exec } = require('child_process');
-        exec('glabels-batch-qt ' + templateFilePath + ' -c ' + req.body.copies, {uid: 1000}, (err, stdout, stderr) => {
+
+        const env = {uid: 1000, env:{'DISPLAY': ':0'}}
+
+        exec('glabels-batch-qt ' + templateFilePath + ' -c ' + req.body.copies, env, (err, stdout, stderr) => {
             fs.unlinkSync(templateFilePath)
             if (err) {
                 return res
                 .status(500)
-                .json({ success: false, error: err, stderr: stderr, stdout: stdout })
+                .json({ success: false, env: env, error: err, stderr: stderr, stdout: stdout })
             } else {
                 return res.status(200).json({ success: true, data: templateXml })
             }
