@@ -13,7 +13,22 @@ const storage = multer.diskStorage({
   }
 })
 
-MulterUpload = multer({ storage: storage }).single('file')
+multerUpload = multer({ storage: storage }).single('file')
+
+customUpload = (req, res) => {
+    multerUpload(req,res,function(err) {
+        if(err) {
+            return res.status(400).json({
+                err,
+                message: 'File not uploaded!',
+            })
+        }
+        
+        res.status(201).json({
+            success: true,
+        })
+    });
+}
 
 createBatch = (req, res) => {
     const body = req.body
@@ -223,7 +238,7 @@ printBatchById = async (req, res) => {
 
 module.exports = {
     createBatch,
-    MulterUpload,
+    customUpload,
     updateBatch,
     deleteBatch,
     getBatches,
