@@ -41,7 +41,7 @@ http.createServer(app).listen(httpPort, function(){
 if(!process.argv.includes('dev')){
   var options = {
     key: fs.readFileSync('/etc/letsencrypt/live/volamtarpeppers.wrclan.ca/privkey.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/volamtarpeppers.wrclan.com/fullchain.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/volamtarpeppers.wrclan.ca/fullchain.pem'),
   };
 
   https.createServer(options, app).listen(httpsPort, function(){
