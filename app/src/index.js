@@ -31,8 +31,8 @@ app.use('/api', ingredientRouter)
 app.use('/api', userRouter)
 app.use(express.static(__dirname + '/public'));
 
-const httpPort = 3000
-const httpsPort = 3001
+const httpPort = 5000
+const httpsPort = 5100
 
 http.createServer(app).listen(httpPort, function(){
     console.log("HTTP server listening on port " + httpPort);
