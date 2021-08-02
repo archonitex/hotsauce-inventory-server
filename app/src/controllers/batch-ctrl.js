@@ -96,6 +96,8 @@ updateBatch = async (req, res) => {
         if(body.imageName){
             body.imageUrl = '//volamtarpeppers.wrclan.ca:5100/images/' + body.imageName
             delete body.imageName
+        } else {
+            body.imageUrl = batch.imageUrl
         }
 
         batch.name = body.name
