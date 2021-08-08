@@ -9,6 +9,7 @@ const Batch = new Schema(
         ingredients: [ { ingredient: String, quantity: String } ],
         notes: { type: String },
         imageUrl: { type: String },
+        videoUrl: { type: String },
         stock: { type: Number },
         price: { type: Number },
         storeDescription: { type: String, default: '' },

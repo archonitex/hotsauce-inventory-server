@@ -109,6 +109,7 @@ updateBatch = async (req, res) => {
         batch.price = body.price
         batch.status = body.status
         batch.imageUrl = body.imageUrl
+        batch.videoUrl = body.videoUrl
         batch.storeDescription = body.storeDescription;
 
         batch
