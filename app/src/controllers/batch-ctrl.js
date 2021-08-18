@@ -1,8 +1,18 @@
+const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api").default;
+
 const Batch = require('../models/batch-model')
 const path = require("path");
 var moment = require('moment')
 var multer = require('multer')
 var fs = require('fs')
+
+const wooApi = new WooCommerceRestApi({
+    url: "https://www.volamtar.com",
+    consumerKey: "ck_d9591d96ba857d2cb5663cdb3ba7a7dd349226fc",
+    consumerSecret: "cs_af143364fa5cf9cb072a6f31abffbb0f9924416e",
+    version: "wc/v3",
+    queryStringAuth: true
+  });
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -242,6 +252,120 @@ printBatchById = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+syncNewBatchesWithWooCommerce = async (req, res) => { 
+    await Batch.find({ storeId: null, status: true }, (err, batches) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }else if (!batches.length) {
+            return res.status(204).json({ success: true, data: [] })
+        }
+
+        var createBatch = {"create": []}
+        batches.forEach(batch => { 
+            createBatch.create.push(batch.toWooCommerceProduct())
+        })
+
+        wooApi.post("products/batch", createBatch)
+            .then((response) => {
+                let wooProducts = response.data.create
+
+                console.log('Response from batch')
+                console.log(response.data)
+
+                wooProducts.forEach(wooproduct => {
+                    Batch.findOne({ _id: wooproduct.sku }, (err, batch) => {
+                        if(!batch) return;
+                        batch.storeId = wooproduct.id
+
+                        console.log("Updating local batch from newly created item in WooCommerce.")
+                        
+                        batch
+                            .save()
+                            .catch(error => {
+                                console.log("Error updating batch from WooCommerce: " + error)
+                            })
+                    })
+                });
+            })
+            .catch((error) => {
+                // Invalid request, for 4xx and 5xx statuses
+                console.log("Invalid WooCommerce Request.")
+                console.log("Response Status:", error.response.status);
+                console.log(error.response)
+              })
+
+        return res.status(200).json({ success: true })
+    }).catch(err => console.log(err))
+    
+}
+
+syncExistingBatchesWithWooCommerce = async (req, res) => {
+    await Batch.find({ storeId: { $ne: null }, status: true }, (err, batches) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }else if (!batches.length) {
+            return res.status(204).json({ success: true, data: [] })
+        }
+
+        var updateBatch = {"update": []}
+        batches.forEach(batch => { 
+            updateBatch.update.push(batch.toWooCommerceProduct())
+        })
+
+        wooApi.post("products/batch", updateBatch)
+            .catch((error) => {
+                // Invalid request, for 4xx and 5xx statuses
+                console.log("Invalid WooCommerce Request.")
+                console.log("Response Status:", error.response.status);
+                console.log(error.response)
+              })
+
+        return res.status(200).json({ success: true })
+    }).catch(err => console.log(err))
+}
+
+
+syncLocalBatchesFromWooCommerce = async (req, res) => {
+    //TODO be able to scan multiple pages
+    wooApi.get("products", {
+        per_page: 100, // 100 products per page
+      })
+        .then((response) => {
+            let wooProducts = response.data
+
+            wooProducts.forEach(wooproduct => {
+                Batch.findOne({ _id: wooproduct.sku }, (err, batch) => {
+                    if(!batch) return;
+                    
+                    //Update stock, price, sku, storeId
+                    batch.stock = wooproduct.stock_quantity
+                    batch.price = parseInt(wooproduct.price)
+                    batch.storeId = wooproduct.id
+            
+                    console.log("Updating local batch from WooCommerce")
+                    console.log(batch)
+
+                    batch
+                        .save()
+                        .catch(error => {
+                            console.log("Error updating batch from WooCommerce: " + error)
+                        })
+                })
+            });
+
+        })
+        .catch((error) => {
+          // Invalid request, for 4xx and 5xx statuses
+          console.log("Invalid WooCommerce Request.")
+          console.log("Response Status:", error.response.status);
+        })
+        .finally(() => {
+            return res.status(200).json({ success: true })
+        });
+
+}
+
+
 module.exports = {
     createBatch,
     customUpload,
@@ -252,4 +376,8 @@ module.exports = {
     getBatchById,
 
     printBatchById,
+
+    syncNewBatchesWithWooCommerce,
+    syncExistingBatchesWithWooCommerce,
+    syncLocalBatchesFromWooCommerce,
 }
