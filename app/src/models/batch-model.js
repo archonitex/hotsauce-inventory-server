@@ -36,7 +36,7 @@ Batch.methods.toWooCommerceProduct = function() {
         catalog_visibility: 'visible',
       }
     
-    if(storeId) wooProduct.id = this.storeId
+    if(this.storeId) wooProduct.id = this.storeId
 
     return wooProduct
 };
