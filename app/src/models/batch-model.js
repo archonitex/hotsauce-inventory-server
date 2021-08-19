@@ -20,13 +20,22 @@ const Batch = new Schema(
 )
 
 Batch.methods.toWooCommerceProduct = function() {
+     //Heat
+    var heatString = ''
+    let numberOfPeppers = Math.round(parseFloat(this.heat/10))
+    for (var i=0; i < numberOfPeppers; i++) {
+        heatString += "🌶️"
+    }
+    
+    var shortDescription = heatString + "\n" + "Ingredients: " + this.ingredients.map(function(item) { return item.ingredient }).join(', ')
+
     var wooProduct = {
         name: this.name,
         type: "simple",
         price: this.price.toString(),
         regular_price: this.price.toString(),
         description: this.storeDescription,
-        short_description: this.ingredients.map(function(item) { return item.ingredient }).join(', '),
+        short_description: shortDescription,
         sku: this.id,
         purchasable: true,
         manage_stock: true,
