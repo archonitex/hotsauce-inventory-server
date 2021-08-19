@@ -27,14 +27,14 @@ Batch.methods.toWooCommerceProduct = function() {
         heatString += "🌶️"
     }
     
-    var shortDescription = heatString + "\n" + "Ingredients: " + this.ingredients.map(function(item) { return item.ingredient }).join(', ')
+    var shortDescription = heatString + "\n" + this.storeDescription
 
     var wooProduct = {
         name: this.name,
         type: "simple",
         price: this.price.toString(),
         regular_price: this.price.toString(),
-        description: this.storeDescription,
+        description: "Ingredients: " + this.ingredients.map(function(item) { return item.ingredient }).join(', '),
         short_description: shortDescription,
         sku: this.id,
         purchasable: true,
