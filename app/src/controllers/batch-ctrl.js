@@ -320,47 +320,60 @@ syncExistingBatchesWithWooCommerce = async (req, res) => {
 
 
 syncLocalBatchesFromWooCommerce = async (req, res) => {
-    //TODO be able to scan multiple pages
-    wooApi.get("products", {
-        per_page: 100, // 100 products per page
-      })
-        .then((response) => {
-            let wooProducts = response.data
 
-            wooProducts.forEach(wooproduct => {
-                Batch.findOne({ _id: wooproduct.sku }, (err, batch) => {
-                    if(!batch) return;
-                    
-                    //Update stock, price, sku, storeId
-                    batch.stock = wooproduct.stock_quantity
-                    batch.price = parseInt(wooproduct.price)
-                    batch.storeId = wooproduct.id
+    var fetchProducts = async(page, cb) => {
+        wooApi.get("products", {
+            per_page: 20,
+            page: page
+          })
+            .then((response) => {
+                let wooProducts = response.data
+                console.log(response)
+    
+                wooProducts.forEach(wooproduct => {
+                    Batch.findOne({ _id: wooproduct.sku }, (err, batch) => {
+                        if(!batch) return;
+                        
+                        //Update stock, price, sku, storeId
+                        batch.stock = wooproduct.stock_quantity
+                        batch.price = parseInt(wooproduct.price)
+                        batch.storeId = wooproduct.id
+    
+                        if(wooproduct.images && wooproduct.images.length > 0){
+                            batch.imageUrl = wooproduct.images[0].src
+                        }
+                
+                        batch
+                            .save()
+                            .catch(error => {
+                                console.log("Error updating batch from WooCommerce: " + error)
+                            })
+                    })
+                });
 
-                    if(wooproduct.images && wooproduct.images.length > 0){
-                        batch.imageUrl = wooproduct.images[0].src
-                    }
-            
-                    console.log("Updating local batch from WooCommerce")
-                    console.log(batch)
+                let totalPages = parseInt(response.headers['x-wp-totalpages'])
+                let nextPage = (page || 1) + 1
+                cb(totalPages > nextPage ? nextPage : undefined )
+            })
+            .catch((error) => {
+              // Invalid request, for 4xx and 5xx statuses
+              console.log("Invalid WooCommerce Request.")
+              console.log("Response Status:", error.response.status);
+              return res.status(error.response.status).json({ success: false })
+            })
+    }
 
-                    batch
-                        .save()
-                        .catch(error => {
-                            console.log("Error updating batch from WooCommerce: " + error)
-                        })
-                })
-            });
-
-        })
-        .catch((error) => {
-          // Invalid request, for 4xx and 5xx statuses
-          console.log("Invalid WooCommerce Request.")
-          console.log("Response Status:", error.response.status);
-        })
-        .finally(() => {
+    var fetchCb;
+    fetchCb = function(nextPage){
+        if(nextPage){
+            fetchProducts(nextPage, fetchCb)
+        }else{
             return res.status(200).json({ success: true })
-        });
+        }
+    }
 
+    //No page specified, start from start
+    fetchProducts(undefined, fetchCb) 
 }
 
 
