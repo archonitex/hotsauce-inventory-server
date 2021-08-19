@@ -50,9 +50,6 @@ createBatch = (req, res) => {
         })
     }
 
-    //Fix date format
-    body.date = moment(body.date, 'DD-MM-YYYY')
-
     //Check for image
     if(body.imageName){
         body.imageUrl = '//volamtarpeppers.wrclan.ca:5100/images/' + body.imageName
@@ -99,9 +96,7 @@ updateBatch = async (req, res) => {
                 message: 'Batch not found!',
             })
         }
-        //Fix date format
-        body.date = moment(body.date, 'DD-MM-YYYY')
-        
+
         //Check for image
         if(body.imageName){
             body.imageUrl = '//volamtarpeppers.wrclan.ca:5100/images/' + body.imageName
@@ -111,7 +106,6 @@ updateBatch = async (req, res) => {
         }
 
         batch.name = body.name
-        batch.date = body.date
         batch.notes = body.notes
         batch.heat = body.heat
         batch.ingredients = body.ingredients
