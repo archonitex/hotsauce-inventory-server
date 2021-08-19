@@ -341,6 +341,10 @@ syncLocalBatchesFromWooCommerce = async (req, res) => {
                     batch.stock = wooproduct.stock_quantity
                     batch.price = parseInt(wooproduct.price)
                     batch.storeId = wooproduct.id
+
+                    if(wooproduct.images && wooproduct.images.length > 0){
+                        batch.imageUrl = wooproduct.images[0].src
+                    }
             
                     console.log("Updating local batch from WooCommerce")
                     console.log(batch)
