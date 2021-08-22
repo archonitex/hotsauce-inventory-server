@@ -36,12 +36,12 @@ Batch.methods.toWooCommerceProduct = function() {
         description: "Ingredients: " + this.ingredients.map(function(item) { return item.ingredient }).join(', '),
         short_description: shortDescription,
         sku: this.id,
-        purchasable: this.status,
+        purchasable: true,
         manage_stock: true,
         stock_quantity: this.stock,
         stock_status: this.stock > 0 ? "instock" : "outofstock",
         status: 'publish',
-        catalog_visibility: 'visible',
+        catalog_visibility: this.status ? 'visible' : 'hidden',
       }
     
     if(this.storeId) wooProduct.id = this.storeId
