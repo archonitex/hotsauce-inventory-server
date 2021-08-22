@@ -36,7 +36,7 @@ Batch.methods.toWooCommerceProduct = function() {
         description: "Ingredients: " + this.ingredients.map(function(item) { return item.ingredient }).join(', '),
         short_description: shortDescription,
         sku: this.id,
-        purchasable: status,
+        purchasable: this.status,
         manage_stock: true,
         stock_quantity: this.stock,
         stock_status: this.stock > 0 ? "instock" : "outofstock",
