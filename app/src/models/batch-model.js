@@ -21,7 +21,7 @@ const Batch = new Schema(
 Batch.methods.toWooCommerceProduct = function() {
      //Heat
     var heatString = ''
-    let numberOfPeppers = Math.round(parseFloat(this.heat/10))
+    let numberOfPeppers = Math.round(parseFloat(this.heat/20))
     for (var i=0; i < numberOfPeppers; i++) {
         heatString += "🌶️"
     }
