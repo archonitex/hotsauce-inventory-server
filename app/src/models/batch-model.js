@@ -41,7 +41,7 @@ Batch.methods.toWooCommerceProduct = function() {
         stock_quantity: this.stock,
         stock_status: this.stock > 0 ? "instock" : "outofstock",
         status: this.status ? 'publish' : 'draft',
-        catalog_visibility: 'visible',
+        post_status: this.status ? 'publish' : 'draft',
       }
     
     if(this.storeId) wooProduct.id = this.storeId
