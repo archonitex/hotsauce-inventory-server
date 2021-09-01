@@ -294,7 +294,7 @@ syncNewBatchesWithWooCommerce = async (req, res) => {
 }
 
 syncExistingBatchesWithWooCommerce = async (req, res) => {
-    await Batch.find({ storeId: { $ne: null }, status: true }, (err, batches) => {
+    await Batch.find({ storeId: { $ne: null } }, (err, batches) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }else if (!batches.length) {
