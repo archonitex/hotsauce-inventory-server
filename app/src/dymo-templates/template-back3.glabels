@@ -7,24 +7,24 @@
     </Label-rectangle>
   </Template>
   <Objects id="0" rotate="True">
-    <Object-text x="0.19in" y="0.152292in" w="2.75183in" h="0.305556in" justify="Left" valign="Top" auto_shrink="True" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
-      <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="12" font_weight="Regular" font_italic="False" line_spacing="1">VV_BATCH_NAME_VV</Span>
+    <Object-text x="0.19in" y="0.112292in" w="0.2in" h="0.305556in" justify="Left" valign="Top" auto_shrink="True" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="11" font_weight="Regular" font_italic="False" line_spacing="1">${BATCH_NAME}</Span>
     </Object-text>
-    <Object-text x="0.19in" y="1.77024in" w="1.58333in" h="0.182616in" justify="Left" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
-      <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="8" font_weight="Regular" font_italic="False" line_spacing="1">Bottled On VV_DATE_VV</Span>
+    <Object-text x="0.19in" y="1.68056in" w="1.58333in" h="0.180556in" justify="Left" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="8" font_weight="Regular" font_italic="False" line_spacing="1">Bottled On ${DATE}</Span>
     </Object-text>
-    <Object-image x="3.07008in" y="0.125in" w="0.691251in" h="0.694444in" src="/home/archon/Development/hotsauce-inventory-server/images/logo.png" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0"/>
-    <Object-text x="0.075in" y="0.444444in" w="2.701in" h="1.00357in" justify="Left" valign="Top" auto_shrink="True" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
-      <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="8" font_weight="Regular" font_italic="False" line_spacing="1">VV_INGREDIENTS_VV</Span>
+    <Object-image x="3.0in" y="0.125in" w="0.691252in" h="0.694444in" src="/home/archon/Development/hotsauce-inventory-server/images/logo.png" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0"/>
+    <Object-text x="0.19in" y="0.444444in" w="1.0611in" h="2.280556in" justify="Left" valign="Top" auto_shrink="True" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="10" font_weight="Regular" font_italic="False" line_spacing="1">${INGREDIENTS}</Span>
     </Object-text>
-    <Object-text x="0.19in" y="1.38856in" w="2.02778in" h="0.347222in" justify="Left" valign="Bottom" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+    <Object-text x="0.19in" y="1.23611in" w="2.02778in" h="0.347222in" justify="Left" valign="Bottom" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
       <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="12" font_weight="Regular" font_italic="False" line_spacing="1">VOLAMTAR PEPPERS</Span>
     </Object-text>
     <Object-box x="3.33333in" y="0.930556in" w="0.152756in" h="0.849957in" line_width="0.0194444in" line_color="0x000000ff" fill_color="0xffffffff" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0"/>
-    <Object-text x="3.24794in" y="1.80873in" w="0.388889in" h="0.222222in" justify="Left" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+    <Object-text x="3.22104in" y="1.76389in" w="0.388889in" h="0.222222in" justify="Left" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
       <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="8" font_weight="Regular" font_italic="False" line_spacing="1">HEAT</Span>
     </Object-text>
-    <Object-box x="3.35072in" y="1.76708in" w="0.11811in" h="VV_HEAT_VV" line_width="0in" line_color="0xeeeeecff" fill_color="0xef2929ff" a0="1" a1="0" a2="0" a3="-1" a4="0" a5="0"/>
+    <Object-box x="3.35072in" y="1.76708in" w="0.11811in" h="${HEAT_BAR_HEIGHT}pt" line_width="0in" line_color="0xeeeeecff" fill_color="0xef2929ff" a0="1" a1="0" a2="0" a3="-1" a4="0" a5="0"/>
     <Object-text x="0.19in" y="1.45833in" w="2.02778in" h="0.25in" justify="Left" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
       <Span color="0x000000ff" font_family="Bitstream Vera Sans Mono" font_size="12" font_weight="Regular" font_italic="False" line_spacing="1"/>
     </Object-text>

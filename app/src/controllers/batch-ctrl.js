@@ -5,6 +5,7 @@ const path = require("path");
 var moment = require('moment')
 var multer = require('multer')
 var fs = require('fs')
+var wrap = require('word-wrap');
 
 const wooApi = new WooCommerceRestApi({
     url: "https://www.volamtar.com",
@@ -205,23 +206,25 @@ printBatchById = async (req, res) => {
                 .json({ success: false, error: `Batch not found` })
         }
 
+        const copies = req.body.copies;
         const pathToGLabel = path.resolve(__dirname, '../dymo-templates')
         
         var templateXml = fs.readFileSync(pathToGLabel + '/template.glabels', 'utf8');
         
         //Customize template with batch info
-        templateXml = templateXml.replace("${BATCH_ID}", batch.id);
-        templateXml = templateXml.replace("${BATCH_NAME}", batch.name);
-        templateXml = templateXml.replace("${DATE}", moment(batch.createdAt).format('ll'));
+        templateXml = templateXml.replace("VV_BATCH_ID_VV", batch.id);
+        templateXml = templateXml.replace("VV_BATCH_NAME_VV", batch.name);
+        templateXml = templateXml.replace("VV_DATE_VV", moment(batch.createdAt).format('ll'));
         
         var ingredientsString = batch.ingredients.map(function(item) {
             return item.ingredient
           }).join(', ');
-        templateXml = templateXml.replace("${INGREDIENTS}", ingredientsString);
+        ingredientsString = wrap(ingredientsString, {width: 35});
+        templateXml = templateXml.replace("VV_INGREDIENTS_VV", ingredientsString);
         
         const maxHeightValue = 61;
         var heatBarHeight = (batch.heat / 100) * maxHeightValue;
-        templateXml = templateXml.replace("${HEAT_BAR_HEIGHT}", heatBarHeight.toString());
+        templateXml = templateXml.replace("VV_HEAT_VV", heatBarHeight.toString());
 
         //Create temporary file
         const templateFilePath = pathToGLabel + '/' + batch.id + '.glabels';
@@ -240,17 +243,14 @@ printBatchById = async (req, res) => {
                 .json({ success: false, env: env, error: err, stderr: stderr, stdout: stdout })
             }
 
-            exec('lpr ' + templatePDFFilePath, env, (lprErr, lprStdout, lprStderr) => {
-                fs.unlinkSync(templatePDFFilePath)
-                if (lprErr) {
-                    return res
-                    .status(500)
-                    .json({ success: false, env: env, error: lprErr, stderr: lprStderr, stdout: lprStdout })
-                }
+            for(var i=0; i < copies; i++){
+                exec('lpr ' + templatePDFFilePath, env, (lprErr, lprStdout, lprStderr) => {})
+            }
 
+            //Delete the file in 2 minutes
+            setTimeout(() => { fs.unlinkSync(templatePDFFilePath) }, 120000)
 
-                return res.status(200).json({ success: true, data: templateXml })
-            });
+            return res.status(200).json({ success: true, data: templateXml })
         });
         
     }).catch(err => console.log(err))
