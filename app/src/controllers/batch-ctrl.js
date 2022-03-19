@@ -225,22 +225,32 @@ printBatchById = async (req, res) => {
 
         //Create temporary file
         const templateFilePath = pathToGLabel + '/' + batch.id + '.glabels';
+        const templatePDFFilePath = pathToGLabel + '/' + batch.id + '.pdf';
         fs.writeFileSync(templateFilePath, templateXml); 
 
         //Execute
         const { exec } = require('child_process');
-
         const env = {uid: 1000, env:{'DISPLAY': ':0'}}
 
-        exec('glabels-batch-qt ' + templateFilePath + ' -c ' + req.body.copies, env, (err, stdout, stderr) => {
+        exec('glabels-3-batch ' + templateFilePath + ' -o ' + templatePDFFilePath, env, (err, stdout, stderr) => {
             fs.unlinkSync(templateFilePath)
             if (err) {
                 return res
                 .status(500)
                 .json({ success: false, env: env, error: err, stderr: stderr, stdout: stdout })
-            } else {
-                return res.status(200).json({ success: true, data: templateXml })
             }
+
+            exec('lpr ' + templatePDFFilePath, env, (lprErr, lprStdout, lprStderr) => {
+                fs.unlinkSync(templatePDFFilePath)
+                if (lprErr) {
+                    return res
+                    .status(500)
+                    .json({ success: false, env: env, error: lprErr, stderr: lprStderr, stdout: lprStdout })
+                }
+
+
+                return res.status(200).json({ success: true, data: templateXml })
+            });
         });
         
     }).catch(err => console.log(err))
