@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Glabels-document version="4.0">
+  <Template width="153.071pt" height="286.299pt" description="Address labels" brand="Dymo" part="99014" size="Other">
+    <Label-rectangle width="153.071pt" height="286.299pt" y_waste="0pt" id="0" round="0pt" x_waste="0pt">
+      <Markup-margin size="0pt"/>
+      <Layout nx="1" dy="286.299pt" dx="153.071pt" ny="1" y0="0pt" x0="0pt"/>
+    </Label-rectangle>
+  </Template>
+  <Objects id="0" rotate="true">
+    <Object-text x="8.68pt" font_family="Bitstream Vera Sans Mono" a4="0" y="11.965pt" align="left" a1="0" shadow_y="0pt" font_size="8" a3="1" font_weight="normal" font_italic="false" shadow="false" lock_aspect_ratio="false" shadow_color="0x0" a5="0" auto_shrink="true" shadow_opacity="1" a2="0" wrap="word" valign="top" w="152pt" shadow_x="0pt" font_underline="false" a0="1" color="0xff" h="24pt" line_spacing="1">
+      <p>VV_BATCH_NAME_VV</p>
+    </Object-text>
+    <Object-text x="8.68pt" font_family="Bitstream Vera Sans Mono" a4="0" y="117.028pt" align="left" a1="0" shadow_y="0pt" font_size="6" a3="1" font_weight="normal" font_italic="false" shadow="false" lock_aspect_ratio="false" shadow_color="0x0" a5="0" auto_shrink="false" shadow_opacity="1" a2="0" wrap="word" valign="top" w="219.32pt" shadow_x="0pt" font_underline="false" a0="1" color="0xff" h="28.4573pt" line_spacing="1">
+      <p>Shake well before serving!</p>
+      <p>Bottled On VV_DATE_VV</p>
+    </Object-text>
+    <Object-text x="9.4pt" font_family="Bitstream Vera Sans Mono" a4="0" y="32pt" align="left" a1="0" shadow_y="0pt" font_size="5" a3="1" font_weight="normal" font_italic="false" shadow="false" lock_aspect_ratio="false" shadow_color="0x0" a5="0" auto_shrink="true" shadow_opacity="1" a2="0" wrap="word" valign="top" w="106pt" shadow_x="0pt" font_underline="false" a0="1" color="0xff" h="18pt" line_spacing="1">
+      <p>VV_INGREDIENTS_VV</p>
+    </Object-text>
+    <Object-box x="240pt" a4="0" a1="0" shadow_y="0pt" y="67pt" a3="1" shadow="false" lock_aspect_ratio="false" shadow_color="0x0" fill_color="0xffffffff" a5="0" shadow_opacity="1" a2="0" w="10.9984pt" shadow_x="0pt" a0="1" line_color="0xff" h="61.1969pt" line_width="0.9pt"/>
+    <Object-text x="229.852pt" font_family="Bitstream Vera Sans Mono" a4="0" y="129.229pt" align="left" a1="0" shadow_y="0pt" font_size="6" a3="1" font_weight="normal" font_italic="false" shadow="false" lock_aspect_ratio="false" shadow_color="0x0" a5="0" auto_shrink="false" shadow_opacity="1" a2="0" wrap="word" valign="top" w="32pt" shadow_x="0pt" font_underline="false" a0="1" color="0xff" h="18pt" line_spacing="1">
+      <p>HEAT</p>
+    </Object-text>
+    <Object-box x="241.252pt" a4="0" a1="0" shadow_y="0pt" y="127.23pt" a3="-1" shadow="false" lock_aspect_ratio="false" shadow_color="0x0" fill_color="0xef2929ff" a5="0" shadow_opacity="1" a2="0" w="8.50392pt" shadow_x="0pt" a0="1" line_color="0xeeeeecff" h="VV_HEAT_VV" line_width="0pt"/>
+  </Objects>
+  <Data/>
+</Glabels-document>
