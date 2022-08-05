@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Glabels-document xmlns="http://glabels.org/xmlns/3.0/">
+  <Template brand="Dymo" part="99014" size="Other" width="2.12599in" height="3.97637in" description="Address labels">
+    <Label-rectangle id="0" width="2.12599in" height="3.97637in" round="0in" x_waste="0in" y_waste="0in">
+      <Markup-margin size="0in"/>
+      <Layout nx="1" ny="1" x0="0in" y0="0in" dx="2.12599in" dy="3.97637in"/>
+    </Label-rectangle>
+  </Template>
+  <Objects id="0" rotate="True">
+    <Object-text x="0.180556in" y="0.166181in" w="2.11111in" h="0.333333in" justify="Left" valign="Top" auto_shrink="True" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Sans" font_size="10" font_weight="Regular" font_italic="False" line_spacing="1">VV_BATCH_NAME_VV</Span>
+    </Object-text>
+    <Object-text x="0.180556in" y="1.62539in" w="3.04611in" h="0.39524in" justify="Left" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Sans" font_size="9" font_weight="Regular" font_italic="False" line_spacing="1">Shake well before serving!<NL/>Bottled On VV_DATE_VV</Span>
+    </Object-text>
+    <Object-text x="0.180556in" y="0.444444in" w="1.47222in" h="0.25in" justify="Left" valign="Top" auto_shrink="True" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Sans" font_size="8" font_weight="Regular" font_italic="False" line_spacing="1">VV_INGREDIENTS_VV</Span>
+    </Object-text>
+    <Object-box x="3.33333in" y="0.930556in" w="0.152756in" h="0.849957in" line_width="0.0125in" line_color="0x000000ff" fill_color="0xffffffff" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0"/>
+    <Object-text x="3.19239in" y="1.79485in" w="0.444444in" h="0.25in" justify="Center" valign="Top" auto_shrink="False" a0="1" a1="0" a2="0" a3="1" a4="0" a5="0">
+      <Span color="0x000000ff" font_family="Sans" font_size="8" font_weight="Regular" font_italic="False" line_spacing="1">HEAT</Span>
+    </Object-text>
+    <Object-box x="3.35072in" y="1.76708in" w="0.11811in" h="VV_HEAT_VV" line_width="0in" line_color="0xeeeeecff" fill_color="0xef2929ff" a0="1" a1="0" a2="0" a3="-1" a4="0" a5="0"/>
+  </Objects>
+  <Data/>
+</Glabels-document>
