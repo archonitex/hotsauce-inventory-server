@@ -214,12 +214,12 @@ printBatchById = async (req, res) => {
         //Customize template with batch info
         templateXml = templateXml.replace("VV_BATCH_ID_VV", batch.id);
         templateXml = templateXml.replace("VV_BATCH_NAME_VV", batch.name);
-        templateXml = templateXml.replace("VV_DATE_VV", moment(batch.createdAt).format('ll'));
+        templateXml = templateXml.replace("VV_DATE_VV", moment().format('ll'));
         
         var ingredientsString = batch.ingredients.map(function(item) {
             return item.ingredient
           }).join(', ');
-        ingredientsString = wrap(ingredientsString, {width: 35});
+        ingredientsString = wrap(ingredientsString, {width: 70});
         templateXml = templateXml.replace("VV_INGREDIENTS_VV", ingredientsString);
         
         const maxHeightValue = 61;
