@@ -209,7 +209,7 @@ printBatchById = async (req, res) => {
         const copies = req.body.copies;
         const pathToGLabel = path.resolve(__dirname, '../dymo-templates')
         
-        var templateXml = fs.readFileSync(pathToGLabel + '/template-details.glabels', 'utf8');
+        var templateXml = fs.readFileSync(pathToGLabel + '/template-details-2.glabels', 'utf8');
         
         //Customize template with batch info
         templateXml = templateXml.replace("VV_BATCH_ID_VV", batch.id);
@@ -252,22 +252,6 @@ printBatchById = async (req, res) => {
 
             return res.status(200).json({ success: true, data: templateXml })
         });
-        
-        //Print the logo label
-        const logoFilePath = pathToGLabel + '/template-logo.glabels';
-        const logoPDFFilePath = pathToGLabel + '/logo.pdf';
-        
-        if(!fs.existsSync(logoFilePath)){
-            exec('glabels-3-batch ' + logoFilePath + ' -o ' + logoPDFFilePath, env, (err, stdout, stderr) => {
-                for(var i=0; i < copies; i++){
-                    exec('lpr ' + logoPDFFilePath, env, (lprErr, lprStdout, lprStderr) => {})
-                }
-            });
-        }else{
-            for(var i=0; i < copies; i++){
-                exec('lpr ' + logoPDFFilePath, env, (lprErr, lprStdout, lprStderr) => {})
-            }
-        }
         
     }).catch(err => console.log(err))
 }
